@@ -49,3 +49,56 @@ Este pacote contém tudo que você precisa para conduzir o desenvolvimento do te
 - **Documente desvios** no próprio `AGENTS.md` se algo mudar durante o desenvolvimento. Isso ajuda na revisão e mostra maturidade.
 
 Boa sorte no teste!
+
+---
+
+## Backend mock (json-server)
+
+A API de desenvolvimento roda localmente via `json-server` na porta `3001`.
+
+### Como rodar
+
+```bash
+pnpm install
+pnpm dev:api          # apenas o backend mock
+# ou
+pnpm dev              # frontend (3000) + backend (3001) juntos
+```
+
+### Endpoints principais
+
+| Método | Endpoint | Descrição |
+| --- | --- | --- |
+| `GET` | `/events` | Lista eventos |
+| `GET` | `/events/:id` | Detalhe do evento |
+| `GET` | `/participants?event_id=EVT-001` | Participantes do evento |
+| `GET` | `/checkins?event_id=EVT-001&_sort=timestamp&_order=desc` | Histórico de check-ins |
+| `POST` | `/checkins` | Registra check-in |
+| `PATCH` | `/participants/:id` | Atualiza status do participante |
+| `PATCH` | `/events/:id` | Atualiza métricas agregadas do evento |
+
+### Origem dos dados
+
+O `server/db.json` foi obtido do repositório oficial do teste técnico:
+[`ThiagoLifters/api_test`](https://github.com/ThiagoLifters/api_test). O conteúdo
+foi copiado integralmente, sem alterações, para garantir paridade com o seed
+canônico do desafio.
+
+### Resetar o banco
+
+`json-server` persiste mutações (POST/PATCH) diretamente no `db.json`. Para
+voltar ao estado original:
+
+```bash
+git checkout server/db.json
+```
+
+### Eventos disponíveis (edge cases)
+
+| ID | Nome | Status |
+| --- | --- | --- |
+| `EVT-001` | Tech Summit 2025 | `active` |
+| `EVT-002` | Design Week Rio | `closed` |
+| `EVT-003` | Startup Pitch Night | `active` |
+| `EVT-004` | Festival de Música Indie | `cancelled` |
+| `EVT-005` | DevConf Brasil | `active` |
