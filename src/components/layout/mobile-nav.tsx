@@ -2,14 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { CalendarRangeIcon, HomeIcon, SettingsIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-const MOBILE_NAV_ITEMS = [
-  { href: '/', icon: HomeIcon, label: 'Início' },
-  { href: '/events', icon: CalendarRangeIcon, label: 'Eventos' },
-  { href: '/settings', icon: SettingsIcon, label: 'Configurações' },
-] as const;
+import { NAV_ITEMS } from '@/types/navigation';
 
 export function MobileNav() {
   const pathname = usePathname();
@@ -19,7 +13,7 @@ export function MobileNav() {
       aria-label="Navegação mobile"
       className="fixed inset-x-0 bottom-0 z-50 flex h-16 items-center border-t border-border/60 bg-background/95 backdrop-blur md:hidden"
     >
-      {MOBILE_NAV_ITEMS.map(({ href, icon: Icon, label }) => {
+      {NAV_ITEMS.map(({ href, icon: Icon, label }) => {
         const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href);
         return (
           <Link
