@@ -29,9 +29,9 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`dark ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`dark ${geistSans.variable} ${geistMono.variable} h-full overflow-hidden antialiased`}
     >
-      <body className="bg-background text-foreground h-full">
+      <body className="h-full overflow-hidden bg-background text-foreground">
         <Providers>
           <div className="flex h-full min-h-screen">
             <Sidebar />
