@@ -22,7 +22,7 @@ export function TopBar() {
 
         <Avatar className="size-8 cursor-pointer ring-1 ring-border/60 ring-offset-1 ring-offset-background transition-opacity hover:opacity-80">
           <AvatarFallback className="bg-primary/15 text-xs font-semibold text-primary">
-            JD
+            LA
           </AvatarFallback>
         </Avatar>
       </div>

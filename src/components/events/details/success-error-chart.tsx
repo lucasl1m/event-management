@@ -12,6 +12,8 @@ type SuccessErrorChartProps = {
 type TooltipPayload = { name?: string; value?: number; payload?: { fill?: string } };
 type CustomTooltipProps = { active?: boolean; payload?: TooltipPayload[] };
 
+const ERROR_SEGMENT_COLOR = 'var(--chart-4)';
+
 function CustomTooltip({ active, payload }: CustomTooltipProps) {
   if (!active || !payload?.length) return null;
   const item = payload[0];
@@ -32,8 +34,8 @@ export function SuccessErrorChart({ event }: SuccessErrorChartProps) {
   const errorRate = total > 0 ? event.error_count / total : 0;
 
   const data = [
-    { name: t('success'), value: event.checkin_count, fill: 'oklch(0.78 0.16 162.48)' },
-    { name: t('error'), value: event.error_count, fill: 'oklch(0.645 0.246 16.439)' },
+    { name: t('success'), value: event.checkin_count, fill: 'var(--primary)' },
+    { name: t('error'), value: event.error_count, fill: ERROR_SEGMENT_COLOR },
   ];
 
   if (total === 0) {
@@ -82,7 +84,7 @@ export function SuccessErrorChart({ event }: SuccessErrorChartProps) {
       <div className="flex w-full justify-center gap-6">
         <div className="flex flex-col items-center gap-0.5">
           <div className="flex items-center gap-1.5">
-            <span className="size-2 rounded-full bg-emerald-400" aria-hidden />
+            <span className="size-2 rounded-full bg-primary" aria-hidden />
             <span className="text-xs font-semibold tabular-nums text-foreground">
               {formatPercent(successRate)}
             </span>
@@ -94,7 +96,7 @@ export function SuccessErrorChart({ event }: SuccessErrorChartProps) {
 
         <div className="flex flex-col items-center gap-0.5">
           <div className="flex items-center gap-1.5">
-            <span className="size-2 rounded-full bg-rose-400" aria-hidden />
+            <span className="size-2 rounded-full bg-chart-4" aria-hidden />
             <span className="text-xs font-semibold tabular-nums text-foreground">
               {formatPercent(errorRate)}
             </span>

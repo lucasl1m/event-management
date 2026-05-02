@@ -32,7 +32,7 @@ function ParticipantTypeBadge({ type }: { type: Participant['type'] }) {
 
   if (type === 'vip') {
     return (
-      <span className="inline-flex items-center gap-1 rounded-full border border-amber-500/30 bg-amber-500/10 px-2 py-0.5 text-[11px] font-semibold text-amber-300">
+      <span className="inline-flex items-center gap-1 rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-foreground">
         <StarIcon className="size-3" aria-hidden />
         {t('vip')}
       </span>
@@ -55,7 +55,7 @@ function StatusDot({ status }: { status: Participant['status'] }) {
         className={cn(
           'size-2 rounded-full',
           status === 'inside'
-            ? 'bg-emerald-400 shadow-[0_0_6px_--theme(--color-emerald-400/60%)]'
+            ? 'bg-success shadow-[0_0_6px_color-mix(in_oklch,var(--success)_60%,transparent)]'
             : 'bg-muted-foreground',
         )}
       />

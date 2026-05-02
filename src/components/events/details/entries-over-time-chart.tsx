@@ -92,12 +92,7 @@ export function EntriesOverTimeChart({ checkins }: EntriesOverTimeChartProps) {
           }
           cursor={{ fill: 'var(--chart-cursor)' }}
         />
-        <Bar
-          dataKey="entries"
-          fill="oklch(0.78 0.16 162.48)"
-          radius={[4, 4, 0, 0]}
-          maxBarSize={40}
-        />
+        <Bar dataKey="entries" fill="var(--primary)" radius={[4, 4, 0, 0]} maxBarSize={40} />
       </BarChart>
     </ResponsiveContainer>
   );

@@ -8,18 +8,18 @@ const STATUS_STYLES: Record<
 > = {
   active: {
     labelKey: 'active',
-    container: 'border-emerald-500/25 bg-emerald-500/10 text-emerald-300',
-    dot: 'bg-emerald-400 shadow-[0_0_0_3px_rgba(16,185,129,0.18)]',
+    container: 'border-success/30 bg-success/10 text-foreground',
+    dot: 'bg-success shadow-[0_0_0_3px_color-mix(in_oklch,var(--success)_18%,transparent)]',
   },
   closed: {
     labelKey: 'closed',
-    container: 'border-border bg-muted/60 text-muted-foreground',
+    container: 'border-border bg-muted/60 text-foreground',
     dot: 'bg-muted-foreground',
   },
   cancelled: {
     labelKey: 'cancelled',
-    container: 'border-rose-500/25 bg-rose-500/10 text-rose-300',
-    dot: 'bg-rose-400 shadow-[0_0_0_3px_rgba(244,63,94,0.18)]',
+    container: 'border-destructive/30 bg-destructive/10 text-foreground',
+    dot: 'bg-destructive shadow-[0_0_0_3px_color-mix(in_oklch,var(--destructive)_18%,transparent)]',
   },
 };
 

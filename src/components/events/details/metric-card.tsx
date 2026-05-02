@@ -15,23 +15,23 @@ type MetricCardProps = {
 
 const variantIconStyles: Record<MetricVariant, string> = {
   default: 'bg-muted/50 text-muted-foreground',
-  success: 'bg-emerald-500/10 text-emerald-400',
-  warning: 'bg-amber-500/10 text-amber-400',
-  error: 'bg-rose-500/10 text-rose-400',
+  success: 'bg-success/10 text-success',
+  warning: 'bg-warning/10 text-warning',
+  error: 'bg-destructive/10 text-destructive',
 };
 
 const variantSubtitleStyles: Record<MetricVariant, string> = {
   default: 'text-muted-foreground',
-  success: 'text-emerald-400',
-  warning: 'text-amber-400',
-  error: 'text-rose-400',
+  success: 'text-foreground',
+  warning: 'text-warning',
+  error: 'text-destructive',
 };
 
 const variantBorderStyles: Record<MetricVariant, string> = {
   default: '',
-  success: '[border-top-color:theme(colors.emerald.500/40%)]',
-  warning: '[border-top-color:theme(colors.amber.500/40%)]',
-  error: '[border-top-color:theme(colors.rose.500/40%)]',
+  success: 'border-t-success/40',
+  warning: 'border-t-warning/40',
+  error: 'border-t-destructive/40',
 };
 
 export function MetricCard({

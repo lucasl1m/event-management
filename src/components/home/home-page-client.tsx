@@ -118,14 +118,14 @@ export function HomePageClient() {
           label={t('stats.activeEvents')}
           value={metrics.active}
           icon={<ActivityIcon className="size-3.5" aria-hidden />}
-          accent="emerald"
+          accent="success"
           index={1}
         />
         <StatCard
           label={t('stats.totalCheckins')}
           value={metrics.totalCheckins}
           icon={<CheckCircle2Icon className="size-3.5" aria-hidden />}
-          accent="emerald"
+          accent="success"
           index={2}
         />
         <StatCard
@@ -133,14 +133,14 @@ export function HomePageClient() {
           value={metrics.avgRate}
           format={{ style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }}
           icon={<TrendingUpIcon className="size-3.5" aria-hidden />}
-          accent={metrics.avgRate >= 0.8 ? 'emerald' : metrics.avgRate >= 0.5 ? 'amber' : 'rose'}
+          accent={metrics.avgRate >= 0.8 ? 'success' : metrics.avgRate >= 0.5 ? 'warning' : 'error'}
           index={3}
         />
         <StatCard
           label={t('stats.totalErrors')}
           value={metrics.totalErrors}
           icon={<AlertCircleIcon className="size-3.5" aria-hidden />}
-          accent={metrics.totalErrors > 0 ? 'rose' : 'muted'}
+          accent={metrics.totalErrors > 0 ? 'error' : 'muted'}
           index={4}
         />
       </div>

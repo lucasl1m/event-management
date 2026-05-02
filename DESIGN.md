@@ -86,7 +86,7 @@ The aesthetic is "Modern Professional"—a blend of Swiss-inspired typography, a
 
 ## Implementation Notes
 
-The project uses **Geist Sans** (instead of Inter from the spec) for all text — Geist is a close relative of Inter with slightly tighter metrics, better suited for dense data UIs. All color values from the spec are mapped to the existing Tailwind/shadcn warm dark + orange accent theme configured in `globals.css`. **Theme:** default **dark**, with user-selectable **light**, **dark**, or **system** via `next-themes` (`:root` = light, `.dark` = dark); charts use CSS variables (`--chart-grid`, `--chart-cursor`, `--muted-foreground`) so axes and grids stay legible in both modes.
+The project uses **Geist Sans** (instead of Inter from the spec) for all text — Geist is a close relative of Inter with slightly tighter metrics, better suited for dense data UIs. All color values from the spec are mapped to the existing Tailwind/shadcn warm dark + orange accent theme configured in `globals.css`. **Theme:** default **dark**, with user-selectable **light**, **dark**, or **system** via `next-themes` (`:root` = light, `.dark` = dark); status indicators use semantic CSS variables so success stays on the brand orange (`#ff7437`) while warning/error/closed states remain visually distinct and accessible. Charts use their existing CSS variables (`--chart-grid`, `--chart-cursor`, `--muted-foreground`) so axes and grids stay legible in both modes.
 
 ## Colors
 
@@ -102,8 +102,10 @@ The brand orange (`#ff7437`) is the singular "action" color, reserved for primar
 | surface (cards)     | `--card`             | `oklch(0.205 0.009 35)` |
 | border              | `--border`           | `oklch(1 0 0 / 8%)`     |
 | primary (orange)    | `--primary`          | `#ff7437`               |
+| success             | `--success`          | `#ff7437`               |
+| warning             | `--warning`          | `#fbbf24`               |
 | muted text          | `--muted-foreground` | `oklch(0.72 0.008 35)`  |
-| error / destructive | `--destructive`      | rose-500 equivalent     |
+| error / destructive | `--destructive`      | `#fb7185`               |
 
 ## Typography
 
@@ -149,13 +151,13 @@ Icon stroke weight: 1.5px.
 
 ### Data Displays
 
-- **Status chips:** Pill-shaped, 10% opacity background + solid dot. Active=orange, closed=neutral, cancelled=rose.
+- **Status chips:** Pill-shaped with semantic color accents. Active/success uses orange, closed uses neutral, and cancelled/error uses red. Text remains `text-foreground` for contrast in light and dark themes.
 - **Data tables:** Borderless rows with 1px bottom divider. Header cells in all-caps label style, `text-muted-foreground`.
-- **Metric cards:** Colored top-border accent by variant (success/warning/error). Value in `tabular-nums` at 2xl–3xl weight semibold.
+- **Metric cards:** Semantic top-border accents for success/warning/error. Value in `tabular-nums` at 2xl–3xl weight semibold.
 
 ### Charts
 
-- Color palette: orange (`#ff7437`) for success/entries, rose (`#f43f5e`) for errors.
+- Color palette: orange (`#ff7437`) for success/entries. In the success-vs-error chart, the error segment uses adaptive gray (`--chart-4`) to keep the donut visually balanced across light and dark themes.
 - Grid lines: `border-border/30`, very subtle.
 - Axis text: `text-muted-foreground`, 12px.
 - Tooltips: `bg-card border border-border` with standard card styling.

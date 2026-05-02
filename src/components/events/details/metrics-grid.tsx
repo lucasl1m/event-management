@@ -45,7 +45,7 @@ export function MetricsGrid({ event }: MetricsGridProps) {
             ? t('attemptPercent', { percent: formatPercent(errorRate) })
             : t('noAttempts')
         }
-        variant={event.error_count > 0 ? 'warning' : 'default'}
+        variant={event.error_count > 0 ? 'error' : 'default'}
       />
 
       <MetricCard
@@ -69,7 +69,7 @@ export function MetricsGrid({ event }: MetricsGridProps) {
             aria-valuemax={100}
           >
             <div
-              className="h-full rounded-full bg-emerald-500 transition-all duration-700"
+              className="h-full rounded-full bg-success transition-all duration-700"
               style={{ width: `${Math.min(entryPercent * 100, 100)}%` }}
             />
           </div>

@@ -99,16 +99,16 @@ export function EventDetailClient({ eventId }: EventDetailClientProps) {
       {(event.status === 'closed' || event.status === 'cancelled') && (
         <div
           role="alert"
-          className="flex items-start gap-3 rounded-xl border border-amber-500/20 bg-amber-500/8 px-4 py-3.5"
+          className="flex items-start gap-3 rounded-xl border border-warning/25 bg-warning/10 px-4 py-3.5"
         >
-          <BanIcon className="mt-0.5 size-4 shrink-0 text-amber-400" aria-hidden />
+          <BanIcon className="mt-0.5 size-4 shrink-0 text-warning" aria-hidden />
           <div className="flex flex-col gap-0.5">
-            <p className="text-sm font-semibold text-amber-300">
+            <p className="text-sm font-semibold text-foreground">
               {event.status === 'cancelled'
                 ? t('closedBanner.cancelled')
                 : t('closedBanner.closed')}
             </p>
-            <p className="text-xs text-amber-400/80">{t('closedBanner.description')}</p>
+            <p className="text-xs text-foreground">{t('closedBanner.description')}</p>
           </div>
         </div>
       )}

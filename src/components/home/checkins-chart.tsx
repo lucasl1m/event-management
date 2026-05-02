@@ -21,8 +21,8 @@ type TooltipProps = {
 };
 
 const SERIES_TEXT_COLORS: Record<SeriesKey, string> = {
-  checkins: 'oklch(0.78 0.16 162.48)',
-  expected: 'var(--muted-foreground)',
+  checkins: 'var(--primary)',
+  expected: 'var(--chart-4)',
 };
 
 function ChartTooltip({ active, payload, label, labels, locale }: TooltipProps) {
@@ -71,7 +71,7 @@ export function CheckinsChart({ data }: CheckinsChartProps) {
           </p>
           <p className="mt-0.5 text-xs text-foreground">{t('byEvent')}</p>
         </div>
-        <span className="flex size-7 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400">
+        <span className="flex size-7 items-center justify-center rounded-lg bg-primary/10 text-primary">
           <CheckCircle2Icon className="size-3.5" aria-hidden />
         </span>
       </div>
@@ -94,18 +94,8 @@ export function CheckinsChart({ data }: CheckinsChartProps) {
             content={<ChartTooltip labels={labels} locale={locale} />}
             cursor={{ fill: 'var(--chart-cursor)' }}
           />
-          <Bar
-            dataKey="expected"
-            fill="color-mix(in oklch, var(--foreground) 14%, transparent)"
-            radius={[3, 3, 0, 0]}
-            maxBarSize={32}
-          />
-          <Bar
-            dataKey="checkins"
-            fill="oklch(0.78 0.16 162.48)"
-            radius={[3, 3, 0, 0]}
-            maxBarSize={32}
-          />
+          <Bar dataKey="expected" fill="var(--chart-4)" radius={[3, 3, 0, 0]} maxBarSize={32} />
+          <Bar dataKey="checkins" fill="var(--primary)" radius={[3, 3, 0, 0]} maxBarSize={32} />
         </BarChart>
       </ResponsiveContainer>
     </div>

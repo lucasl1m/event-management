@@ -39,15 +39,15 @@ function RateTooltip({ active, payload, label }: TooltipProps) {
 }
 
 const LEGEND: { color: string; label?: string; labelKey?: 'closed' }[] = [
-  { color: 'bg-emerald-400', label: '≥ 80%' },
+  { color: 'bg-primary', label: '≥ 80%' },
   { color: 'bg-amber-400', label: '50–79%' },
   { color: 'bg-rose-400', label: '< 50%' },
-  { color: 'bg-muted-foreground/40', labelKey: 'closed' },
+  { color: 'bg-chart-4', labelKey: 'closed' },
 ];
 
 function barFill(entry: RateChartDataPoint): string {
-  if (entry.status === 'closed') return 'var(--muted-foreground)';
-  if (entry.rate >= 80) return 'oklch(0.78 0.16 162.48)';
+  if (entry.status === 'closed') return 'var(--chart-4)';
+  if (entry.rate >= 80) return 'var(--primary)';
   if (entry.rate >= 50) return 'oklch(0.82 0.13 70)';
   return 'oklch(0.65 0.23 16)';
 }
@@ -68,7 +68,7 @@ export function EntryRateChart({ data }: EntryRateChartProps) {
           </p>
           <p className="mt-0.5 text-xs text-foreground">{t('byEventPercent')}</p>
         </div>
-        <span className="flex size-7 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400">
+        <span className="flex size-7 items-center justify-center rounded-lg bg-primary/10 text-primary">
           <TrendingUpIcon className="size-3.5" aria-hidden />
         </span>
       </div>

@@ -13,9 +13,9 @@ const ITEMS = [
   {
     key: 'active' as const,
     icon: ActivityIcon,
-    color: 'text-emerald-400',
-    bg: 'bg-emerald-500/8',
-    border: 'border-emerald-500/20',
+    color: 'text-success',
+    bg: 'bg-success/8',
+    border: 'border-success/20',
   },
   {
     key: 'closed' as const,
@@ -27,9 +27,9 @@ const ITEMS = [
   {
     key: 'cancelled' as const,
     icon: AlertCircleIcon,
-    color: 'text-rose-400',
-    bg: 'bg-rose-500/8',
-    border: 'border-rose-500/20',
+    color: 'text-destructive',
+    bg: 'bg-destructive/8',
+    border: 'border-destructive/20',
   },
 ];
 
