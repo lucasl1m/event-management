@@ -1,0 +1,27 @@
+{
+  "title": "Eventos",
+  "subtitle": "Gerencie e acompanhe todos os seus eventos em um so lugar.",
+  "expected": "Esperados",
+  "date": "Data",
+  "location": "Local",
+  "showing": "Mostrando {shown} de {total} {label}.",
+  "eventSingle": "evento",
+  "eventPlural": "eventos",
+  "filters": {
+    "searchLabel": "Buscar eventos",
+    "searchPlaceholder": "Buscar eventos...",
+    "statusLabel": "Filtrar por status",
+    "statusAll": "Todos",
+    "statusActive": "Ativos",
+    "statusClosed": "Encerrados",
+    "statusCancelled": "Cancelados",
+    "sortDate": "Data"
+  },
+  "emptyRegistered": "Nenhum evento cadastrado",
+  "loadErrorTitle": "Não foi possível carregar os eventos",
+  "loadErrorDescription": "Verifique sua conexão e tente novamente.",
+  "emptyRegisteredDescription": "Quando houver eventos, eles aparecerao aqui.",
+  "emptyFiltered": "Nenhum evento corresponde aos filtros",
+  "emptyFilteredDescription": "Tente ajustar a busca ou limpar os filtros aplicados.",
+  "clearFilters": "Limpar filtros"
+}

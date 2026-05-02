@@ -1,4 +1,5 @@
 import { AlertTriangleIcon, TrendingUpIcon, UsersIcon, UserCheckIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import type { Event } from '@/types/api';
 import { formatPercent } from '@/lib/format';
 import { AnimatedNumber } from '@/components/shared/animated-number';
@@ -9,6 +10,7 @@ type MetricsGridProps = {
 };
 
 export function MetricsGrid({ event }: MetricsGridProps) {
+  const t = useTranslations('eventDetail.metrics');
   const totalAttempts = event.checkin_count + event.error_count;
   const errorRate = totalAttempts > 0 ? event.error_count / totalAttempts : 0;
   const entryPercent = event.expected_count > 0 ? event.entry_rate : 0;
@@ -17,36 +19,38 @@ export function MetricsGrid({ event }: MetricsGridProps) {
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <MetricCard
         index={0}
-        label="Participantes Esperados"
+        label={t('expectedParticipants')}
         value={<AnimatedNumber value={event.expected_count} />}
         icon={<UsersIcon className="size-4" aria-hidden />}
-        subtitle="Capacidade total do local"
+        subtitle={t('venueCapacity')}
         variant="default"
       />
 
       <MetricCard
         index={1}
-        label="Check-ins Realizados"
+        label={t('completedCheckins')}
         value={<AnimatedNumber value={event.checkin_count} />}
         icon={<UserCheckIcon className="size-4" aria-hidden />}
-        subtitle={`${formatPercent(entryPercent)} dos esperados`}
+        subtitle={t('expectedPercent', { percent: formatPercent(entryPercent) })}
         variant="success"
       />
 
       <MetricCard
         index={2}
-        label="Tentativas com Erro"
+        label={t('failedAttempts')}
         value={<AnimatedNumber value={event.error_count} />}
         icon={<AlertTriangleIcon className="size-4" aria-hidden />}
         subtitle={
-          totalAttempts > 0 ? `${formatPercent(errorRate)} das tentativas` : 'Sem tentativas'
+          totalAttempts > 0
+            ? t('attemptPercent', { percent: formatPercent(errorRate) })
+            : t('noAttempts')
         }
-        variant={event.error_count > 0 ? 'warning' : 'default'}
+        variant={event.error_count > 0 ? 'error' : 'default'}
       />
 
       <MetricCard
         index={3}
-        label="Taxa de Entrada"
+        label={t('entryRate')}
         value={
           <AnimatedNumber
             value={entryPercent}
@@ -59,13 +63,13 @@ export function MetricsGrid({ event }: MetricsGridProps) {
           <div
             className="h-1.5 w-full overflow-hidden rounded-full bg-muted/50"
             role="progressbar"
-            aria-label="Taxa de entrada"
+            aria-label={t('entryRate')}
             aria-valuenow={Math.round(entryPercent * 100)}
             aria-valuemin={0}
             aria-valuemax={100}
           >
             <div
-              className="h-full rounded-full bg-emerald-500 transition-all duration-700"
+              className="h-full rounded-full bg-success transition-all duration-700"
               style={{ width: `${Math.min(entryPercent * 100, 100)}%` }}
             />
           </div>

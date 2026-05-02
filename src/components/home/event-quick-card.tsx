@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import { CalendarIcon, ArrowRightIcon } from 'lucide-react';
+import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { formatEventDate } from '@/lib/format';
 import { StatusBadge } from '@/components/shared/status-badge';
@@ -17,7 +17,7 @@ export function EventQuickCard({ event, index }: EventQuickCardProps) {
       className={cn(
         'group flex items-center justify-between gap-3 rounded-xl border border-border/50 bg-card p-4',
         'opacity-0 [animation:fadeInUp_0.4s_ease_forwards]',
-        'transition-colors duration-150 hover:border-emerald-500/30 hover:bg-card/80',
+        'transition-colors duration-150 hover:border-primary/40 hover:bg-card/80',
       )}
       style={{ animationDelay: `${600 + index * 60}ms` }}
     >
@@ -32,7 +32,7 @@ export function EventQuickCard({ event, index }: EventQuickCardProps) {
 
       <ArrowRightIcon
         aria-hidden
-        className="size-4 shrink-0 text-muted-foreground/40 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-emerald-400"
+        className="size-4 shrink-0 text-muted-foreground/40 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-primary"
       />
     </Link>
   );

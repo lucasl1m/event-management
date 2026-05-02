@@ -1,21 +1,25 @@
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 import type { EventStatus } from '@/types/api';
 
-const STATUS_STYLES: Record<EventStatus, { label: string; container: string; dot: string }> = {
+const STATUS_STYLES: Record<
+  EventStatus,
+  { labelKey: EventStatus; container: string; dot: string }
+> = {
   active: {
-    label: 'Ativo',
-    container: 'border-emerald-500/25 bg-emerald-500/10 text-emerald-300',
-    dot: 'bg-emerald-400 shadow-[0_0_0_3px_rgba(16,185,129,0.18)]',
+    labelKey: 'active',
+    container: 'border-success/30 bg-success/10 text-foreground',
+    dot: 'bg-success shadow-[0_0_0_3px_color-mix(in_oklch,var(--success)_18%,transparent)]',
   },
   closed: {
-    label: 'Encerrado',
-    container: 'border-zinc-700/60 bg-zinc-800/50 text-zinc-300',
-    dot: 'bg-zinc-400',
+    labelKey: 'closed',
+    container: 'border-border bg-muted/60 text-foreground',
+    dot: 'bg-muted-foreground',
   },
   cancelled: {
-    label: 'Cancelado',
-    container: 'border-rose-500/25 bg-rose-500/10 text-rose-300',
-    dot: 'bg-rose-400 shadow-[0_0_0_3px_rgba(244,63,94,0.18)]',
+    labelKey: 'cancelled',
+    container: 'border-destructive/30 bg-destructive/10 text-foreground',
+    dot: 'bg-destructive shadow-[0_0_0_3px_color-mix(in_oklch,var(--destructive)_18%,transparent)]',
   },
 };
 
@@ -25,6 +29,7 @@ type StatusBadgeProps = {
 };
 
 export function StatusBadge({ status, className }: StatusBadgeProps) {
+  const t = useTranslations('common.status');
   const style = STATUS_STYLES[status];
 
   return (
@@ -36,7 +41,7 @@ export function StatusBadge({ status, className }: StatusBadgeProps) {
       )}
     >
       <span aria-hidden="true" className={cn('size-1.5 rounded-full', style.dot)} />
-      {style.label}
+      {t(style.labelKey)}
     </span>
   );
 }

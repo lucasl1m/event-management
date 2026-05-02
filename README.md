@@ -8,22 +8,23 @@ Dashboard para acompanhamento de eventos, controle de acesso de participantes e 
 
 ## Stack
 
-| Camada         | Tecnologia                                              |
-| -------------- | ------------------------------------------------------- |
-| Framework      | Next.js 16 (App Router) + React 19 + TypeScript 5       |
-| Estilo         | Tailwind CSS v4 + shadcn/ui (tema dark, base zinc)      |
-| Estado server  | TanStack Query v5                                       |
-| Estado cliente | Zustand v5                                              |
-| URL state      | nuqs v2                                                 |
-| Gráficos       | Recharts v3                                             |
-| Animações      | @number-flow/react                                      |
-| Backend mock   | json-server 0.17 (mesmo monorepo, porta 3001)           |
-| Validação      | Zod v4                                                  |
-| Testes E2E     | Playwright + @axe-core/playwright                       |
-| Lint/Format    | ESLint 9 + Prettier 3 + eslint-plugin-jsx-a11y          |
-| Git hooks      | Lefthook (pre-commit: lint-staged; pre-push: typecheck) |
-| CI             | GitHub Actions (quality + e2e jobs)                     |
-| Gerenciador    | pnpm                                                    |
+| Camada         | Tecnologia                                               |
+| -------------- | -------------------------------------------------------- |
+| Framework      | Next.js 16 (App Router) + React 19 + TypeScript 5        |
+| Estilo         | Tailwind CSS v4 + shadcn/ui (tema light/dark, base zinc) |
+| i18n           | next-intl (rotas `/pt` e `/en`)                          |
+| Estado server  | TanStack Query v5                                        |
+| Estado cliente | Zustand v5                                               |
+| URL state      | nuqs v2                                                  |
+| Gráficos       | Recharts v3                                              |
+| Animações      | @number-flow/react                                       |
+| Backend mock   | json-server 0.17 (mesmo monorepo, porta 3001)            |
+| Validação      | Zod v4                                                   |
+| Testes E2E     | Playwright + @axe-core/playwright                        |
+| Lint/Format    | ESLint 9 + Prettier 3 + eslint-plugin-jsx-a11y           |
+| Git hooks      | Lefthook (pre-commit: lint-staged; pre-push: typecheck)  |
+| CI             | GitHub Actions (quality + e2e jobs)                      |
+| Gerenciador    | pnpm                                                     |
 
 ---
 
@@ -87,20 +88,23 @@ pnpm dev
 │   └── routes.json             # Rewrites de rota do json-server
 ├── src/
 │   ├── app/
-│   │   ├── (home)/
-│   │   │   └── page.tsx        # Dashboard home (Server Component)
-│   │   ├── events/
-│   │   │   ├── page.tsx        # Listagem de eventos (Server Component)
-│   │   │   └── [id]/
-│   │   │       ├── page.tsx    # Detalhe do evento (Server Component)
-│   │   │       └── loading.tsx # Skeleton automático do App Router
-│   │   ├── layout.tsx          # Layout raiz com metadados globais
-│   │   ├── providers.tsx       # QueryClient + NuqsAdapter + Toaster
-│   │   └── globals.css         # Variáveis de tema e estilos base
+│   │   ├── [locale]/
+│   │   │   ├── (home)/
+│   │   │   │   └── page.tsx        # Dashboard home localizado
+│   │   │   ├── events/
+│   │   │   │   ├── page.tsx        # Listagem de eventos localizada
+│   │   │   │   └── [id]/
+│   │   │   │       ├── page.tsx    # Detalhe do evento localizado
+│   │   │   │       └── loading.tsx # Skeleton automático do App Router
+│   │   │   └── layout.tsx          # Shell visual + NextIntlClientProvider
+│   │   ├── page.tsx                # Redireciona para `/pt`
+│   │   ├── layout.tsx              # Layout raiz técnico com metadados globais
+│   │   ├── providers.tsx           # ThemeProvider + QueryClient + NuqsAdapter + Toaster
+│   │   └── globals.css             # Variáveis de tema e estilos base
 │   ├── components/
 │   │   ├── ui/                 # Primitivos shadcn/ui (button, input, etc.)
 │   │   ├── shared/             # EmptyState, ErrorState, AnimatedNumber...
-│   │   ├── layout/             # Sidebar, TopBar, MobileNav
+│   │   ├── layout/             # Sidebar, TopBar, MobileNav, ThemeToggle, LocaleToggle
 │   │   ├── home/               # StatCard, CheckinsChart, HomeSkeleton...
 │   │   └── events/
 │   │       ├── *.tsx           # EventCard, EventList, EventFilters...
@@ -119,13 +123,21 @@ pnpm dev
 │   │   └── ui-store.ts         # Zustand: sidebar, isMobile
 │   ├── hooks/
 │   │   └── use-debounced-value.ts
+│   ├── i18n/
+│   │   ├── navigation.ts       # Helpers de navegação locale-aware
+│   │   ├── request.ts          # Agrega mensagens por locale
+│   │   └── routing.ts          # Locales suportados e locale padrão
 │   ├── lib/
 │   │   ├── api-client.ts       # Fetch wrapper tipado com tratamento de erros
 │   │   ├── query-client.ts     # Factory de QueryClient com defaults
 │   │   ├── format.ts           # Intl.NumberFormat helpers (pt-BR)
 │   │   └── utils.ts            # cn() do shadcn
+│   ├── messages/
+│   │   ├── pt/                 # Traduções em português por domínio/página
+│   │   └── en/                 # Traduções em inglês por domínio/página
 │   └── types/
 │       └── api.ts              # Tipos base: Event, Participant, Checkin...
+├── src/middleware.ts           # Middleware do next-intl para `/pt` e `/en`
 └── tests/
     └── e2e/
         ├── events-list.spec.ts  # Listagem, filtros, busca, empty/error states
@@ -139,7 +151,15 @@ pnpm dev
 
 ### Next.js App Router
 
-Server Components por padrão reduzem JavaScript no cliente. O `loading.tsx` do App Router gera skeletons automaticamente sem lógica extra no componente de página.
+Server Components por padrão reduzem JavaScript no cliente. O `loading.tsx` do App Router gera skeletons automaticamente sem lógica extra no componente de página. O layout raiz fica técnico, enquanto `src/app/[locale]/layout.tsx` concentra o shell visual da aplicação.
+
+### Internacionalização com next-intl
+
+As rotas são prefixadas com locale (`/pt` e `/en`) para tornar links compartilháveis e previsíveis. As mensagens ficam separadas por domínio/página em `src/messages`, mas são agregadas por `src/i18n/request.ts`, mantendo organização sem dificultar o uso dos hooks do `next-intl`.
+
+### Tema light/dark/system com next-themes
+
+O tema dark continua sendo o padrão visual da aplicação, mas o usuário pode alternar entre claro, escuro e sistema. A escolha fica no `ThemeProvider`, usando CSS variables em `globals.css` para manter os componentes independentes de cores hardcoded.
 
 ### React Query + Zustand + nuqs — três tipos de estado
 
@@ -241,7 +261,7 @@ Os testes usam `page.route()` para interceptar mutations (POST `/checkins`, PATC
 - Geração de boilerplate (schemas Zod, hooks React Query, configuração do Playwright).
 - Estrutura inicial de componentes de UI (MetricCard, EventCard, Skeletons).
 - Configuração de ferramentas (lefthook, lint-staged, GitHub Actions).
-- Instalação e integração de libs novas (@number-flow/react, axe-core).
+- Instalação e integração de libs novas (@number-flow/react, axe-core, next-intl).
 
 **O que foi revisado manualmente:**
 
@@ -261,7 +281,7 @@ Os testes usam `page.route()` para interceptar mutations (POST `/checkins`, PATC
 - **Optimistic updates**: atualizar o estado local imediatamente e reverter em caso de erro melhora a percepção de velocidade.
 - **Real-time via WebSocket**: múltiplos operadores de check-in veriam o painel atualizar sem refresh.
 - **Storybook**: catálogo isolado dos componentes do design system.
-- **i18n**: internacionalização para suportar eventos em outros idiomas.
+- **Cobertura i18n completa**: revisar textos remanescentes em tooltips, gráficos e mensagens operacionais para garantir paridade total PT/EN.
 - **PWA / offline-first**: permitir check-ins mesmo sem internet, sincronizando ao reconectar.
 
 ---

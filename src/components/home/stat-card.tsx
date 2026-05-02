@@ -2,7 +2,7 @@ import { type Format } from '@number-flow/react';
 import { cn } from '@/lib/utils';
 import { AnimatedNumber } from '@/components/shared/animated-number';
 
-export type StatCardAccent = 'emerald' | 'amber' | 'rose' | 'muted';
+export type StatCardAccent = 'success' | 'warning' | 'error' | 'muted';
 
 export type StatCardProps = {
   label: string;
@@ -14,17 +14,17 @@ export type StatCardProps = {
 };
 
 const accentStyles: Record<StatCardAccent, { icon: string; border: string }> = {
-  emerald: {
-    icon: 'bg-emerald-500/10 text-emerald-400',
-    border: '[border-top-color:oklch(0.78_0.16_162.48/40%)] border-t-2',
+  success: {
+    icon: 'bg-success/10 text-success',
+    border: 'border-t-2 border-t-success/40',
   },
-  amber: {
-    icon: 'bg-amber-500/10 text-amber-400',
-    border: '[border-top-color:oklch(0.82_0.13_70/40%)] border-t-2',
+  warning: {
+    icon: 'bg-warning/10 text-warning',
+    border: 'border-t-2 border-t-warning/40',
   },
-  rose: {
-    icon: 'bg-rose-500/10 text-rose-400',
-    border: '[border-top-color:oklch(0.65_0.23_16/40%)] border-t-2',
+  error: {
+    icon: 'bg-destructive/10 text-destructive',
+    border: 'border-t-2 border-t-destructive/40',
   },
   muted: {
     icon: 'bg-muted/50 text-muted-foreground',

@@ -149,10 +149,11 @@ pnpm test:e2e --project=chromium  # apenas Chromium
 
 ### Estilo (Tailwind + shadcn)
 
-- Tema dark por padrão (`<html class="dark">` no layout raiz).
-- Use tokens do tema (`bg-background`, `text-foreground`, `border-border`) em vez de cores cruas.
-- Sem CSS-in-JS. Tailwind + classes utilitárias. Variantes via `cva` quando necessário.
-- Use `cn()` (clsx + tailwind-merge) para classes condicionais.
+- Tema **dark por padrão**, com alternância **Light / Dark / Sistema** via `next-themes` (`ThemeProvider` em `providers.tsx`, toggle na `top-bar`). Tokens em `globals.css` para `:root` (light) e `.dark`.
+- Use os tokens do tema (`bg-background`, `text-foreground`, `border-border`) em vez de cores cruas.
+- shadcn/ui é **copiado** para `src/components/ui` — pode editar à vontade.
+- Nada de CSS-in-JS. Tailwind + classes utilitárias. Variantes via `cva` (já vem com shadcn).
+- Use `cn()` (clsx + tailwind-merge) para concatenar classes condicionais.
 
 ### Estado
 

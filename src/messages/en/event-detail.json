@@ -1,0 +1,66 @@
+{
+  "metadataTitle": "Event {id} - Dashboard",
+  "loadingEvent": "Loading event",
+  "breadcrumbEvents": "Events",
+  "loadErrorTitle": "Could not load event",
+  "loadErrorDescription": "Check whether the event exists and try again.",
+  "metricsTitle": "Event metrics",
+  "chartsTitle": "Charts",
+  "entriesEvolution": "Entries over time",
+  "successVsError": "Success vs. error",
+  "participantsTitle": "Participants",
+  "breadcrumbLabel": "Breadcrumb navigation",
+  "closedBanner": {
+    "cancelled": "Event cancelled",
+    "closed": "Event closed",
+    "description": "Participant entries and exits are no longer allowed."
+  },
+  "metrics": {
+    "expectedParticipants": "Expected participants",
+    "venueCapacity": "Total venue capacity",
+    "completedCheckins": "Completed check-ins",
+    "expectedPercent": "{percent} of expected",
+    "failedAttempts": "Failed attempts",
+    "attemptPercent": "{percent} of attempts",
+    "noAttempts": "No attempts",
+    "entryRate": "Entry rate"
+  },
+  "entriesChart": {
+    "empty": "No entries registered",
+    "entrySingular": "entry",
+    "entryPlural": "entries"
+  },
+  "successErrorChart": {
+    "success": "Success",
+    "error": "Error",
+    "attempts": "attempts",
+    "empty": "No attempts registered"
+  },
+  "participants": {
+    "statusInside": "Inside",
+    "statusOutside": "Outside",
+    "eventCancelled": "Event cancelled",
+    "eventClosed": "Event closed",
+    "alreadyCheckedIn": "Participant has already checked in",
+    "entry": "Entry",
+    "exit": "Exit",
+    "actionFor": "{action} for {name}",
+    "filters": {
+      "all": "All",
+      "inside": "Inside",
+      "outside": "Outside"
+    },
+    "searchLabel": "Search participant",
+    "searchPlaceholder": "Search participant...",
+    "tableLabel": "Participants list",
+    "caption": "Event participants, showing {shown} of {total}",
+    "participant": "Participant",
+    "type": "Type",
+    "status": "Status",
+    "actions": "Actions",
+    "empty": "No participants found",
+    "showing": "Showing {shown} of {total} participants"
+  },
+  "emptyParticipants": "No participants registered",
+  "emptyParticipantsDescription": "Participants will appear here when available."
+}

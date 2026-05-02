@@ -1,6 +1,6 @@
-import { CalendarRangeIcon, HomeIcon } from 'lucide-react';
+import { Calendar, Home } from 'lucide-react';
 
 export const NAV_ITEMS = [
-  { href: '/', icon: HomeIcon, label: 'Início' },
-  { href: '/events', icon: CalendarRangeIcon, label: 'Eventos' },
+  { href: '/', icon: Home, labelKey: 'home' },
+  { href: '/events', icon: Calendar, labelKey: 'events' },
 ] as const;
