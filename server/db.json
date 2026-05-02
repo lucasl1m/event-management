@@ -56,7 +56,7 @@
       "status": "active",
       "description": "Conferência para desenvolvedores com trilhas sobre front-end, back-end, DevOps e segurança. Mais de 80 palestrantes confirmados.",
       "expected_count": 20,
-      "checkin_count": 21,
+      "checkin_count": 22,
       "error_count": 1,
       "entry_rate": 1
     }
@@ -443,8 +443,8 @@
       "event_id": "EVT-005",
       "name": "Natalia Monteiro",
       "type": "vip",
-      "status": "outside",
-      "checkin_count": 4
+      "status": "inside",
+      "checkin_count": 5
     },
     {
       "id": "EVT-005-P004",
@@ -1357,6 +1357,15 @@
       "error_reason": null,
       "timestamp": "2026-05-02T12:17:32.761Z",
       "id": "XOPyKw2"
+    },
+    {
+      "event_id": "EVT-005",
+      "participant_id": "EVT-005-P003",
+      "action": "entry",
+      "success": true,
+      "error_reason": null,
+      "timestamp": "2026-05-02T20:03:55.727Z",
+      "id": "2_y2xoA"
     }
   ]
 }

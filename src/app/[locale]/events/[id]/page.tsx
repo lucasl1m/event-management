@@ -1,14 +1,17 @@
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 import { EventDetailClient } from '@/components/events/details/event-detail-client';
 
 type Props = {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string; locale: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = await params;
+  const { id, locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'eventDetail' });
+
   return {
-    title: `Evento ${id} — Painel de Gestão de Eventos`,
+    title: t('metadataTitle', { id }),
   };
 }
 

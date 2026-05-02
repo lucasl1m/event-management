@@ -1,0 +1,26 @@
+{
+  "retry": "Try again",
+  "errorTitle": "Something went wrong",
+  "errorDescription": "There was an error loading the data. Please try again.",
+  "status": {
+    "active": "Active",
+    "closed": "Closed",
+    "cancelled": "Cancelled"
+  },
+  "participantType": {
+    "vip": "VIP",
+    "normal": "Regular"
+  },
+  "checkin": {
+    "errors": {
+      "eventClosed": "This event is not accepting check-ins.",
+      "alreadyCheckedIn": "This participant has already checked in.",
+      "invalidAction": "Invalid action for the participant's current state.",
+      "generic": "Error processing check-in."
+    },
+    "success": {
+      "entry": "Check-in completed successfully.",
+      "exit": "Check-out registered successfully."
+    }
+  }
+}

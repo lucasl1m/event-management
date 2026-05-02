@@ -1,0 +1,36 @@
+{
+  "title": "Home",
+  "empty": "No events found.",
+  "overview": "Overview of {total} {eventsLabel} - {active} {activeLabel}, {closed} {closedLabel}, {cancelled} {cancelledLabel}.",
+  "eventsSingular": "event",
+  "eventsPlural": "events",
+  "activeSingular": "active",
+  "activePlural": "active",
+  "closedSingular": "closed",
+  "closedPlural": "closed",
+  "cancelledSingular": "cancelled",
+  "cancelledPlural": "cancelled",
+  "stats": {
+    "totalEvents": "Total events",
+    "activeEvents": "Active events",
+    "totalCheckins": "Total check-ins",
+    "averageRate": "Average rate",
+    "totalErrors": "Total errors"
+  },
+  "charts": {
+    "checkinsVsExpected": "Check-ins vs expected",
+    "byEvent": "by event",
+    "expected": "Expected",
+    "checkins": "Check-ins",
+    "entryRate": "Entry rate",
+    "byEventPercent": "by event (%)",
+    "closed": "Closed"
+  },
+  "activeEvents": "Active events",
+  "statusBreakdown": {
+    "active": "Active",
+    "closed": "Closed",
+    "cancelled": "Cancelled"
+  },
+  "viewAll": "View all"
+}
