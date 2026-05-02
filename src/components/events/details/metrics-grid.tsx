@@ -1,7 +1,7 @@
-import NumberFlow from '@number-flow/react';
 import { AlertTriangleIcon, TrendingUpIcon, UsersIcon, UserCheckIcon } from 'lucide-react';
 import type { Event } from '@/types/api';
 import { formatPercent } from '@/lib/format';
+import { AnimatedNumber } from '@/components/shared/animated-number';
 import { MetricCard } from './metric-card';
 
 type MetricsGridProps = {
@@ -18,7 +18,7 @@ export function MetricsGrid({ event }: MetricsGridProps) {
       <MetricCard
         index={0}
         label="Participantes Esperados"
-        value={<NumberFlow value={event.expected_count} locales="pt-BR" />}
+        value={<AnimatedNumber value={event.expected_count} />}
         icon={<UsersIcon className="size-4" aria-hidden />}
         subtitle="Capacidade total do local"
         variant="default"
@@ -27,7 +27,7 @@ export function MetricsGrid({ event }: MetricsGridProps) {
       <MetricCard
         index={1}
         label="Check-ins Realizados"
-        value={<NumberFlow value={event.checkin_count} locales="pt-BR" />}
+        value={<AnimatedNumber value={event.checkin_count} />}
         icon={<UserCheckIcon className="size-4" aria-hidden />}
         subtitle={`${formatPercent(entryPercent)} dos esperados`}
         variant="success"
@@ -36,7 +36,7 @@ export function MetricsGrid({ event }: MetricsGridProps) {
       <MetricCard
         index={2}
         label="Tentativas com Erro"
-        value={<NumberFlow value={event.error_count} locales="pt-BR" />}
+        value={<AnimatedNumber value={event.error_count} />}
         icon={<AlertTriangleIcon className="size-4" aria-hidden />}
         subtitle={
           totalAttempts > 0 ? `${formatPercent(errorRate)} das tentativas` : 'Sem tentativas'
@@ -48,10 +48,9 @@ export function MetricsGrid({ event }: MetricsGridProps) {
         index={3}
         label="Taxa de Entrada"
         value={
-          <NumberFlow
+          <AnimatedNumber
             value={entryPercent}
             format={{ style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }}
-            locales="pt-BR"
           />
         }
         icon={<TrendingUpIcon className="size-4" aria-hidden />}
