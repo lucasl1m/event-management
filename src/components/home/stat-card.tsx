@@ -1,5 +1,6 @@
-import NumberFlow, { type Format } from '@number-flow/react';
+import { type Format } from '@number-flow/react';
 import { cn } from '@/lib/utils';
+import { AnimatedNumber } from '@/components/shared/animated-number';
 
 export type StatCardAccent = 'emerald' | 'amber' | 'rose' | 'muted';
 
@@ -59,10 +60,9 @@ export function StatCard({
           {icon}
         </span>
       </div>
-      <NumberFlow
+      <AnimatedNumber
         value={value}
         format={format}
-        locales="pt-BR"
         className="text-3xl font-semibold tabular-nums tracking-tight text-foreground"
       />
     </div>

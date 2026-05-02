@@ -1,6 +1,6 @@
-import NumberFlow from '@number-flow/react';
 import { ActivityIcon, XCircleIcon, AlertCircleIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { AnimatedNumber } from '@/components/shared/animated-number';
 
 type StatusBreakdownProps = {
   active: number;
@@ -46,9 +46,8 @@ export function StatusBreakdown({ active, closed, cancelled }: StatusBreakdownPr
             <Icon className="size-4" aria-hidden />
           </span>
           <div className="min-w-0">
-            <NumberFlow
+            <AnimatedNumber
               value={values[key]}
-              locales="pt-BR"
               className="text-xl font-semibold tabular-nums tracking-tight text-foreground"
             />
             <p className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
