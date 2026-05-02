@@ -2,10 +2,14 @@
 
 import { useMemo } from 'react';
 import { parseAsString, parseAsStringEnum, useQueryState } from 'nuqs';
+import { CalendarSearchIcon, InboxIcon } from 'lucide-react';
 import { useEvents } from '@/features/events/hooks';
 import { useDebouncedValue } from '@/hooks/use-debounced-value';
+import { EmptyState } from '@/components/shared/empty-state';
+import { ErrorState } from '@/components/shared/error-state';
 import { EventFilters, type SortDirection, type StatusFilter } from './event-filters';
 import { EventList } from './event-list';
+import { EventListSkeleton } from './event-list-skeleton';
 
 const statusValues = ['all', 'active', 'closed', 'cancelled'] as const;
 const sortValues = ['asc', 'desc'] as const;
@@ -46,6 +50,56 @@ export function EventsPageClient() {
   }, [eventsQuery.data, status, debouncedSearch, sort]);
 
   const totalUnfiltered = eventsQuery.data?.length ?? 0;
+  const hasActiveFilters = status !== 'all' || debouncedSearch.trim().length > 0;
+
+  const renderContent = () => {
+    if (eventsQuery.isLoading) {
+      return <EventListSkeleton count={6} />;
+    }
+
+    if (eventsQuery.isError) {
+      return (
+        <ErrorState
+          title="Não foi possível carregar os eventos"
+          description="Verifique sua conexão e tente novamente."
+          onRetry={() => eventsQuery.refetch()}
+        />
+      );
+    }
+
+    if (totalUnfiltered === 0) {
+      return (
+        <EmptyState
+          icon={InboxIcon}
+          title="Nenhum evento cadastrado"
+          description="Quando houver eventos, eles aparecerão aqui."
+        />
+      );
+    }
+
+    if (filteredEvents.length === 0) {
+      return (
+        <EmptyState
+          icon={CalendarSearchIcon}
+          title="Nenhum evento corresponde aos filtros"
+          description="Tente ajustar a busca ou limpar os filtros aplicados."
+          action={
+            hasActiveFilters
+              ? {
+                  label: 'Limpar filtros',
+                  onClick: () => {
+                    setSearch('');
+                    setStatus('all');
+                  },
+                }
+              : undefined
+          }
+        />
+      );
+    }
+
+    return <EventList events={filteredEvents} />;
+  };
 
   return (
     <section className="flex flex-col gap-6">
@@ -58,7 +112,7 @@ export function EventsPageClient() {
         onSortChange={setSort}
       />
 
-      {totalUnfiltered > 0 ? (
+      {!eventsQuery.isLoading && !eventsQuery.isError && totalUnfiltered > 0 ? (
         <p className="text-xs text-muted-foreground" aria-live="polite">
           Mostrando{' '}
           <span className="font-medium tabular-nums text-foreground">{filteredEvents.length}</span>{' '}
@@ -67,7 +121,7 @@ export function EventsPageClient() {
         </p>
       ) : null}
 
-      <EventList events={filteredEvents} />
+      {renderContent()}
     </section>
   );
 }
