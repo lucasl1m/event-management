@@ -13,6 +13,7 @@ import {
 import { formatNumber, formatPercent } from '@/lib/format';
 import { useEvents } from '@/features/events/hooks';
 import { ErrorState } from '@/components/shared/error-state';
+import { HomeSkeleton } from './home-skeleton';
 import { StatCard } from './stat-card';
 import { EventQuickCard } from './event-quick-card';
 import { CheckinsChart } from './checkins-chart';
@@ -61,7 +62,7 @@ export function HomePageClient() {
 
   const activeEvents = useMemo(() => events?.filter((e) => e.status === 'active') ?? [], [events]);
 
-  if (isLoading) return null;
+  if (isLoading) return <HomeSkeleton />;
 
   if (isError) {
     return (
