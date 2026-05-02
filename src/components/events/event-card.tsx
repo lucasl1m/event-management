@@ -3,7 +3,7 @@ import { CalendarIcon, ChevronRightIcon, MapPinIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { formatEventDate, formatNumber } from '@/lib/format';
 import type { Event } from '@/types/api';
-import { StatusBadge } from './status-badge';
+import { StatusBadge } from '@/components/shared/status-badge';
 
 type EventCardProps = {
   event: Event;

@@ -2,19 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import {
-  CalendarDaysIcon,
-  CalendarRangeIcon,
-  LayoutDashboardIcon,
-  SettingsIcon,
-} from 'lucide-react';
+import { CalendarRangeIcon, HomeIcon, SettingsIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const NAV_ITEMS = [
-  { href: '/dashboard', icon: LayoutDashboardIcon, label: 'Dashboard' },
-  { href: '/events', icon: CalendarRangeIcon, label: 'Events' },
-  { href: '/calendar', icon: CalendarDaysIcon, label: 'Calendar' },
-  { href: '/settings', icon: SettingsIcon, label: 'Settings' },
+  { href: '/', icon: HomeIcon, label: 'Início' },
+  { href: '/events', icon: CalendarRangeIcon, label: 'Eventos' },
+  { href: '/settings', icon: SettingsIcon, label: 'Configurações' },
 ] as const;
 
 export function Sidebar() {
@@ -37,7 +31,7 @@ export function Sidebar() {
 
       <nav className="flex flex-1 flex-col gap-1 px-3 py-4">
         {NAV_ITEMS.map(({ href, icon: Icon, label }) => {
-          const isActive = pathname === href;
+          const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href);
           return (
             <Link
               key={href}

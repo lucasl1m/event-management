@@ -2,19 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import {
-  CalendarDaysIcon,
-  CalendarRangeIcon,
-  LayoutDashboardIcon,
-  SettingsIcon,
-} from 'lucide-react';
+import { CalendarRangeIcon, HomeIcon, SettingsIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const MOBILE_NAV_ITEMS = [
-  { href: '/dashboard', icon: LayoutDashboardIcon, label: 'Dash' },
-  { href: '/events', icon: CalendarRangeIcon, label: 'Events' },
-  { href: '/calendar', icon: CalendarDaysIcon, label: 'Dates' },
-  { href: '/settings', icon: SettingsIcon, label: 'Setup' },
+  { href: '/', icon: HomeIcon, label: 'Início' },
+  { href: '/events', icon: CalendarRangeIcon, label: 'Eventos' },
+  { href: '/settings', icon: SettingsIcon, label: 'Configurações' },
 ] as const;
 
 export function MobileNav() {
@@ -26,7 +20,7 @@ export function MobileNav() {
       className="fixed inset-x-0 bottom-0 z-50 flex h-16 items-center border-t border-border/60 bg-background/95 backdrop-blur md:hidden"
     >
       {MOBILE_NAV_ITEMS.map(({ href, icon: Icon, label }) => {
-        const isActive = pathname === href;
+        const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href);
         return (
           <Link
             key={href}
