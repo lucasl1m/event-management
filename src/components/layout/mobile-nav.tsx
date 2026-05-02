@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils';
 
 const MOBILE_NAV_ITEMS = [
   { href: '/dashboard', icon: LayoutDashboardIcon, label: 'Dash' },
-  { href: '/', icon: CalendarRangeIcon, label: 'Events' },
+  { href: '/events', icon: CalendarRangeIcon, label: 'Events' },
   { href: '/calendar', icon: CalendarDaysIcon, label: 'Dates' },
   { href: '/settings', icon: SettingsIcon, label: 'Setup' },
 ] as const;
