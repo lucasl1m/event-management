@@ -4,21 +4,23 @@ Este pacote contém tudo que você precisa para conduzir o desenvolvimento do te
 
 ## Arquivos
 
-| Arquivo | Para quê serve | Onde colocar |
-|---|---|---|
-| **`AGENTS.md`** | Fonte da verdade para qualquer agente de IA (Claude Code, Cursor, etc.). Define stack, estrutura, convenções e regras de negócio. | **Raiz do repositório do projeto** |
-| **`HANDOFF.md`** | Sequência de prompts numerados (0 a 11) para conduzir o desenvolvimento, etapa por etapa. | Pasta separada (não precisa estar no repo) |
-| **`STITCH_HANDOFF.md`** | Prompts otimizados para gerar a UI no Google Stitch, com briefing visual completo. | Pasta separada (não precisa estar no repo) |
+| Arquivo                 | Para quê serve                                                                                                                    | Onde colocar                               |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| **`AGENTS.md`**         | Fonte da verdade para qualquer agente de IA (Claude Code, Cursor, etc.). Define stack, estrutura, convenções e regras de negócio. | **Raiz do repositório do projeto**         |
+| **`HANDOFF.md`**        | Sequência de prompts numerados (0 a 11) para conduzir o desenvolvimento, etapa por etapa.                                         | Pasta separada (não precisa estar no repo) |
+| **`STITCH_HANDOFF.md`** | Prompts otimizados para gerar a UI no Google Stitch, com briefing visual completo.                                                | Pasta separada (não precisa estar no repo) |
 
 ## Fluxo de uso recomendado
 
 ### Antes de começar a codar
+
 1. Crie o repositório vazio no GitHub (público).
 2. Clone localmente.
 3. Copie o **`AGENTS.md`** para a raiz do repo e faça o primeiro commit (`docs: add agents guide`).
 4. Abra o **`STITCH_HANDOFF.md`** e gere as 3 telas no Google Stitch. Salve as imagens.
 
 ### Durante o desenvolvimento
+
 1. Abra o Claude Code apontando para o repositório.
 2. Cole o **Prompt 0** (contexto inicial) do `HANDOFF.md`.
 3. Execute os prompts **em ordem** (1 → 11), um por vez.
@@ -30,6 +32,7 @@ Este pacote contém tudo que você precisa para conduzir o desenvolvimento do te
 5. Use os **prompts auxiliares** (Apêndice A do `HANDOFF.md`) sempre que precisar refatorar, debugar testes ou criar componente novo.
 
 ### Antes de entregar
+
 1. Execute o **Prompt 11** (checklist final).
 2. Confira o histórico de commits — deve contar uma história coerente.
 3. Verifique se o repo está público.
@@ -67,15 +70,15 @@ pnpm dev              # frontend (3000) + backend (3001) juntos
 
 ### Endpoints principais
 
-| Método | Endpoint | Descrição |
-| --- | --- | --- |
-| `GET` | `/events` | Lista eventos |
-| `GET` | `/events/:id` | Detalhe do evento |
-| `GET` | `/participants?event_id=EVT-001` | Participantes do evento |
-| `GET` | `/checkins?event_id=EVT-001&_sort=timestamp&_order=desc` | Histórico de check-ins |
-| `POST` | `/checkins` | Registra check-in |
-| `PATCH` | `/participants/:id` | Atualiza status do participante |
-| `PATCH` | `/events/:id` | Atualiza métricas agregadas do evento |
+| Método  | Endpoint                                                 | Descrição                             |
+| ------- | -------------------------------------------------------- | ------------------------------------- |
+| `GET`   | `/events`                                                | Lista eventos                         |
+| `GET`   | `/events/:id`                                            | Detalhe do evento                     |
+| `GET`   | `/participants?event_id=EVT-001`                         | Participantes do evento               |
+| `GET`   | `/checkins?event_id=EVT-001&_sort=timestamp&_order=desc` | Histórico de check-ins                |
+| `POST`  | `/checkins`                                              | Registra check-in                     |
+| `PATCH` | `/participants/:id`                                      | Atualiza status do participante       |
+| `PATCH` | `/events/:id`                                            | Atualiza métricas agregadas do evento |
 
 ### Origem dos dados
 
@@ -95,10 +98,10 @@ git checkout server/db.json
 
 ### Eventos disponíveis (edge cases)
 
-| ID | Nome | Status |
-| --- | --- | --- |
-| `EVT-001` | Tech Summit 2025 | `active` |
-| `EVT-002` | Design Week Rio | `closed` |
-| `EVT-003` | Startup Pitch Night | `active` |
+| ID        | Nome                     | Status      |
+| --------- | ------------------------ | ----------- |
+| `EVT-001` | Tech Summit 2025         | `active`    |
+| `EVT-002` | Design Week Rio          | `closed`    |
+| `EVT-003` | Startup Pitch Night      | `active`    |
 | `EVT-004` | Festival de Música Indie | `cancelled` |
-| `EVT-005` | DevConf Brasil | `active` |
+| `EVT-005` | DevConf Brasil           | `active`    |
