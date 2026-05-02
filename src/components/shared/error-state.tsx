@@ -15,10 +15,7 @@ export function ErrorState({
   return (
     <div className="flex flex-col items-center justify-center gap-4 py-16 text-center">
       <div className="flex h-16 w-16 items-center justify-center rounded-full bg-destructive/10">
-        <AlertCircleIcon
-          className="h-8 w-8 text-destructive"
-          aria-hidden="true"
-        />
+        <AlertCircleIcon className="h-8 w-8 text-destructive" aria-hidden="true" />
       </div>
       <div className="space-y-1">
         <h3 className="text-lg font-semibold">{title}</h3>
