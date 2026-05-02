@@ -12,25 +12,18 @@ type ProvidersProps = {
   children: ReactNode;
 };
 
-function AppShell({ children }: ProvidersProps) {
+export function Providers({ children }: ProvidersProps) {
+  const [queryClient] = useState(() => createQueryClient());
   useInitMobile();
   const isMobile = useUiStore((s) => s.isMobile);
 
   return (
-    <TooltipProvider>
-      {children}
-      <Toaster position={isMobile ? 'top-center' : 'top-right'} richColors closeButton />
-    </TooltipProvider>
-  );
-}
-
-export function Providers({ children }: ProvidersProps) {
-  const [queryClient] = useState(() => createQueryClient());
-
-  return (
     <QueryClientProvider client={queryClient}>
       <NuqsAdapter>
-        <AppShell>{children}</AppShell>
+        <TooltipProvider>
+          {children}
+          <Toaster position={isMobile ? 'top-center' : 'top-right'} richColors closeButton />
+        </TooltipProvider>
       </NuqsAdapter>
     </QueryClientProvider>
   );
