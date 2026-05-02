@@ -56,9 +56,9 @@
       "status": "active",
       "description": "Conferência para desenvolvedores com trilhas sobre front-end, back-end, DevOps e segurança. Mais de 80 palestrantes confirmados.",
       "expected_count": 20,
-      "checkin_count": 18,
+      "checkin_count": 21,
       "error_count": 1,
-      "entry_rate": 0.9
+      "entry_rate": 1
     }
   ],
   "participants": [
@@ -427,8 +427,8 @@
       "event_id": "EVT-005",
       "name": "Camila Pereira",
       "type": "vip",
-      "status": "outside",
-      "checkin_count": 4
+      "status": "inside",
+      "checkin_count": 9
     },
     {
       "id": "EVT-005-P002",
@@ -1312,6 +1312,51 @@
       "success": true,
       "action": "exit",
       "error_reason": null
+    },
+    {
+      "event_id": "EVT-005",
+      "participant_id": "EVT-005-P001",
+      "action": "entry",
+      "success": true,
+      "error_reason": null,
+      "timestamp": "2026-05-02T12:16:38.211Z",
+      "id": "lj_4fEL"
+    },
+    {
+      "event_id": "EVT-005",
+      "participant_id": "EVT-005-P001",
+      "action": "exit",
+      "success": true,
+      "error_reason": null,
+      "timestamp": "2026-05-02T12:16:49.926Z",
+      "id": "qmXH8Ho"
+    },
+    {
+      "event_id": "EVT-005",
+      "participant_id": "EVT-005-P001",
+      "action": "entry",
+      "success": true,
+      "error_reason": null,
+      "timestamp": "2026-05-02T12:17:10.894Z",
+      "id": "0vCU7RE"
+    },
+    {
+      "event_id": "EVT-005",
+      "participant_id": "EVT-005-P001",
+      "action": "exit",
+      "success": true,
+      "error_reason": null,
+      "timestamp": "2026-05-02T12:17:19.142Z",
+      "id": "jvhl5vt"
+    },
+    {
+      "event_id": "EVT-005",
+      "participant_id": "EVT-005-P001",
+      "action": "entry",
+      "success": true,
+      "error_reason": null,
+      "timestamp": "2026-05-02T12:17:32.761Z",
+      "id": "XOPyKw2"
     }
   ]
 }

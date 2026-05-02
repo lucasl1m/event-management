@@ -2,19 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import {
-  CalendarDaysIcon,
-  CalendarRangeIcon,
-  LayoutDashboardIcon,
-  SettingsIcon,
-} from 'lucide-react';
+import { CalendarRangeIcon, HomeIcon, SettingsIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const MOBILE_NAV_ITEMS = [
-  { href: '/', icon: LayoutDashboardIcon, label: 'Dash' },
-  { href: '/events', icon: CalendarRangeIcon, label: 'Events' },
-  { href: '/calendar', icon: CalendarDaysIcon, label: 'Dates' },
-  { href: '/settings', icon: SettingsIcon, label: 'Setup' },
+  { href: '/', icon: HomeIcon, label: 'Início' },
+  { href: '/events', icon: CalendarRangeIcon, label: 'Eventos' },
+  { href: '/settings', icon: SettingsIcon, label: 'Configurações' },
 ] as const;
 
 export function MobileNav() {
