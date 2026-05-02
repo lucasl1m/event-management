@@ -33,12 +33,6 @@ export default function RootLayout({
     >
       <body className="h-full overflow-hidden bg-background text-foreground">
         <Providers>
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-foreground focus:ring-2 focus:ring-emerald-400 focus:outline-none"
-          >
-            Pular para o conteúdo
-          </a>
           <div className="flex h-full min-h-screen">
             <Sidebar />
 

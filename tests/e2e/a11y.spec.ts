@@ -75,14 +75,4 @@ test.describe('Accessibility — axe-core', () => {
     const focusedTag = await page.evaluate(() => document.activeElement?.tagName ?? '');
     expect(['A', 'BUTTON', 'INPUT', 'SELECT']).toContain(focusedTag);
   });
-
-  test('skip link is present and points to main content', async ({ page }) => {
-    await page.goto('/');
-
-    const skipLink = page.getByRole('link', { name: /pular para o conteúdo/i });
-    await expect(skipLink).toBeAttached();
-
-    const href = await skipLink.getAttribute('href');
-    expect(href).toBe('#main-content');
-  });
 });
