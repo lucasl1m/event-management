@@ -11,7 +11,7 @@ import {
 import { cn } from '@/lib/utils';
 
 const NAV_ITEMS = [
-  { href: '/dashboard', icon: LayoutDashboardIcon, label: 'Dashboard' },
+  { href: '/', icon: LayoutDashboardIcon, label: 'Dashboard' },
   { href: '/events', icon: CalendarRangeIcon, label: 'Events' },
   { href: '/calendar', icon: CalendarDaysIcon, label: 'Calendar' },
   { href: '/settings', icon: SettingsIcon, label: 'Settings' },
@@ -37,7 +37,7 @@ export function Sidebar() {
 
       <nav className="flex flex-1 flex-col gap-1 px-3 py-4">
         {NAV_ITEMS.map(({ href, icon: Icon, label }) => {
-          const isActive = pathname === href;
+          const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href);
           return (
             <Link
               key={href}

@@ -11,7 +11,7 @@ import {
 import { cn } from '@/lib/utils';
 
 const MOBILE_NAV_ITEMS = [
-  { href: '/dashboard', icon: LayoutDashboardIcon, label: 'Dash' },
+  { href: '/', icon: LayoutDashboardIcon, label: 'Dash' },
   { href: '/events', icon: CalendarRangeIcon, label: 'Events' },
   { href: '/calendar', icon: CalendarDaysIcon, label: 'Dates' },
   { href: '/settings', icon: SettingsIcon, label: 'Setup' },
@@ -26,7 +26,7 @@ export function MobileNav() {
       className="fixed inset-x-0 bottom-0 z-50 flex h-16 items-center border-t border-border/60 bg-background/95 backdrop-blur md:hidden"
     >
       {MOBILE_NAV_ITEMS.map(({ href, icon: Icon, label }) => {
-        const isActive = pathname === href;
+        const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href);
         return (
           <Link
             key={href}
