@@ -30,7 +30,7 @@ Dashboard para acompanhamento de eventos, controle de acesso de participantes e 
 
 ## Pré-requisitos
 
-- **Node.js** 20 ou superior
+- **Node.js** 24 ou superior
 - **pnpm** 9 ou superior (`npm install -g pnpm`)
 
 ---
