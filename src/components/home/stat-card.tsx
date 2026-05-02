@@ -1,10 +1,12 @@
+import NumberFlow, { type Format } from '@number-flow/react';
 import { cn } from '@/lib/utils';
 
 export type StatCardAccent = 'emerald' | 'amber' | 'rose' | 'muted';
 
 export type StatCardProps = {
   label: string;
-  value: string | number;
+  value: number;
+  format?: Format;
   icon: React.ReactNode;
   accent?: StatCardAccent;
   index?: number;
@@ -29,7 +31,14 @@ const accentStyles: Record<StatCardAccent, { icon: string; border: string }> = {
   },
 };
 
-export function StatCard({ label, value, icon, accent = 'muted', index = 0 }: StatCardProps) {
+export function StatCard({
+  label,
+  value,
+  format,
+  icon,
+  accent = 'muted',
+  index = 0,
+}: StatCardProps) {
   const styles = accentStyles[accent];
   return (
     <div
@@ -50,9 +59,12 @@ export function StatCard({ label, value, icon, accent = 'muted', index = 0 }: St
           {icon}
         </span>
       </div>
-      <span className="text-3xl font-semibold tabular-nums tracking-tight text-foreground">
-        {value}
-      </span>
+      <NumberFlow
+        value={value}
+        format={format}
+        locales="pt-BR"
+        className="text-3xl font-semibold tabular-nums tracking-tight text-foreground"
+      />
     </div>
   );
 }

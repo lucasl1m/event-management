@@ -1,5 +1,6 @@
 'use client';
 
+import NumberFlow from '@number-flow/react';
 import { useMemo, useState } from 'react';
 import { StarIcon, SearchIcon, LogInIcon, LogOutIcon, LoaderIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -255,7 +256,7 @@ export function ParticipantsTable({ participants, event }: ParticipantsTableProp
                           {participant.name}
                         </p>
                         <p className="text-xs tabular-nums text-muted-foreground">
-                          {participant.checkin_count}{' '}
+                          <NumberFlow value={participant.checkin_count} locales="pt-BR" />{' '}
                           {participant.checkin_count === 1 ? 'check-in' : 'check-ins'}
                         </p>
                       </div>
