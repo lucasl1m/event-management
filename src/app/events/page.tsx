@@ -1,6 +1,12 @@
+import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { EventsPageClient } from '@/components/events/events-page-client';
 import { EventListSkeleton } from '@/components/events/event-list-skeleton';
+
+export const metadata: Metadata = {
+  title: 'Eventos — Painel de Gestão de Eventos',
+  description: 'Liste, filtre e gerencie todos os seus eventos.',
+};
 
 export default function EventsPage() {
   return (
