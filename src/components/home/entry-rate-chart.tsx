@@ -63,7 +63,7 @@ export function EntryRateChart({ data }: EntryRateChartProps) {
           <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
             Taxa de Entrada
           </p>
-          <p className="mt-0.5 text-xs text-muted-foreground/60">por evento (%)</p>
+          <p className="mt-0.5 text-xs text-muted-foreground">por evento (%)</p>
         </div>
         <span className="flex size-7 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400">
           <TrendingUpIcon className="size-3.5" aria-hidden />

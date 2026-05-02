@@ -124,7 +124,7 @@ test.describe('Check-in rules', () => {
     const firstDisabledButton = page
       .getByRole('button', { name: /Entrada para|Saída para/i })
       .first();
-    await firstDisabledButton.hover();
+    await firstDisabledButton.hover({ force: true });
 
     await expect(page.getByText(/Evento encerrado/i)).toBeVisible({ timeout: 3000 });
   });

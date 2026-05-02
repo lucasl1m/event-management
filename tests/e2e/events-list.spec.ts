@@ -38,7 +38,7 @@ test.describe('Events list', () => {
   });
 
   test('shows empty state when API returns no events', async ({ page }) => {
-    await page.route('**/events**', (route) =>
+    await page.route('**/localhost:3001/events*', (route) =>
       route.fulfill({ status: 200, contentType: 'application/json', body: '[]' }),
     );
 
@@ -49,7 +49,7 @@ test.describe('Events list', () => {
   });
 
   test('shows error state with retry button when API fails', async ({ page }) => {
-    await page.route('**/events**', (route) => route.fulfill({ status: 500 }));
+    await page.route('**/localhost:3001/events*', (route) => route.fulfill({ status: 500 }));
 
     await page.goto('/events');
     await page.waitForLoadState('networkidle');

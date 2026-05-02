@@ -52,7 +52,7 @@ export function CheckinsChart({ data }: CheckinsChartProps) {
           <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
             Check-ins vs Esperados
           </p>
-          <p className="mt-0.5 text-xs text-muted-foreground/60">por evento</p>
+          <p className="mt-0.5 text-xs text-muted-foreground">por evento</p>
         </div>
         <span className="flex size-7 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400">
           <CheckCircle2Icon className="size-3.5" aria-hidden />

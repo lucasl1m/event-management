@@ -59,6 +59,7 @@ export function MetricsGrid({ event }: MetricsGridProps) {
           <div
             className="h-1.5 w-full overflow-hidden rounded-full bg-muted/50"
             role="progressbar"
+            aria-label="Taxa de entrada"
             aria-valuenow={Math.round(entryPercent * 100)}
             aria-valuemin={0}
             aria-valuemax={100}
