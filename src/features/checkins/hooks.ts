@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import type { CheckinAction, Event, Participant } from '@/types/api';
 import { eventsKeys } from '@/features/events/hooks';
@@ -9,7 +10,7 @@ import {
   type UpdateEventMetricsInput,
   type UpdateParticipantInput,
 } from './api';
-import { checkinErrorMessages, validateCheckIn } from './rules';
+import { validateCheckIn } from './rules';
 
 export type CheckInVariables = {
   participant: Participant;
@@ -24,6 +25,7 @@ function computeEntryRate(checkinCount: number, expected: number): number {
 }
 
 export function useCheckIn() {
+  const t = useTranslations('common.checkin');
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -44,7 +46,13 @@ export function useCheckIn() {
         };
         await updateEventMetrics(event.id, nextEventMetrics);
 
-        throw new Error(checkinErrorMessages[validation.reason]);
+        const errorMessageByReason = {
+          event_closed: t('errors.eventClosed'),
+          already_checked_in: t('errors.alreadyCheckedIn'),
+          invalid_action: t('errors.invalidAction'),
+        } satisfies Record<typeof validation.reason, string>;
+
+        throw new Error(errorMessageByReason[validation.reason]);
       }
 
       await createCheckin({
@@ -72,10 +80,7 @@ export function useCheckIn() {
       return { action, participant_id: participant.id, event_id: event.id };
     },
     onSuccess: (result) => {
-      const message =
-        result.action === 'entry'
-          ? 'Check-in realizado com sucesso.'
-          : 'Saída registrada com sucesso.';
+      const message = result.action === 'entry' ? t('success.entry') : t('success.exit');
       toast.success(message);
       queryClient.invalidateQueries({ queryKey: eventsKeys.detail(result.event_id) });
       queryClient.invalidateQueries({ queryKey: eventsKeys.participants(result.event_id) });
@@ -83,7 +88,7 @@ export function useCheckIn() {
       queryClient.invalidateQueries({ queryKey: eventsKeys.all });
     },
     onError: (error, variables) => {
-      toast.error(error instanceof Error ? error.message : 'Erro ao processar check-in.');
+      toast.error(error instanceof Error ? error.message : t('errors.generic'));
       queryClient.invalidateQueries({ queryKey: eventsKeys.detail(variables.event.id) });
     },
   });

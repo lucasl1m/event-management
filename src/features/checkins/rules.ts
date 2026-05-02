@@ -30,9 +30,3 @@ export function validateCheckIn(intent: CheckInIntent): CheckInResult {
 
   return { ok: true };
 }
-
-export const checkinErrorMessages: Record<CheckinErrorReason, string> = {
-  event_closed: 'Este evento não está aceitando check-ins.',
-  already_checked_in: 'Este participante já realizou check-in.',
-  invalid_action: 'Ação inválida para o estado atual do participante.',
-};

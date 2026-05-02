@@ -1,0 +1,66 @@
+{
+  "metadataTitle": "Evento {id} - Painel",
+  "loadingEvent": "Carregando evento",
+  "breadcrumbEvents": "Eventos",
+  "loadErrorTitle": "Nao foi possivel carregar o evento",
+  "loadErrorDescription": "Verifique se o evento existe e tente novamente.",
+  "metricsTitle": "Metricas do evento",
+  "chartsTitle": "Graficos",
+  "entriesEvolution": "Evolucao de entradas",
+  "successVsError": "Sucesso vs. erro",
+  "participantsTitle": "Participantes",
+  "breadcrumbLabel": "Navegação de caminho",
+  "closedBanner": {
+    "cancelled": "Evento cancelado",
+    "closed": "Evento fechado",
+    "description": "Entradas e saídas de participantes não são mais permitidas."
+  },
+  "metrics": {
+    "expectedParticipants": "Participantes esperados",
+    "venueCapacity": "Capacidade total do local",
+    "completedCheckins": "Check-ins realizados",
+    "expectedPercent": "{percent} dos esperados",
+    "failedAttempts": "Tentativas com erro",
+    "attemptPercent": "{percent} das tentativas",
+    "noAttempts": "Sem tentativas",
+    "entryRate": "Taxa de entrada"
+  },
+  "entriesChart": {
+    "empty": "Nenhuma entrada registrada",
+    "entrySingular": "entrada",
+    "entryPlural": "entradas"
+  },
+  "successErrorChart": {
+    "success": "Sucesso",
+    "error": "Erro",
+    "attempts": "tentativas",
+    "empty": "Sem tentativas registradas"
+  },
+  "participants": {
+    "statusInside": "Dentro",
+    "statusOutside": "Fora",
+    "eventCancelled": "Evento cancelado",
+    "eventClosed": "Evento encerrado",
+    "alreadyCheckedIn": "Participante já realizou check-in",
+    "entry": "Entrada",
+    "exit": "Saída",
+    "actionFor": "{action} para {name}",
+    "filters": {
+      "all": "Todos",
+      "inside": "Dentro",
+      "outside": "Fora"
+    },
+    "searchLabel": "Buscar participante",
+    "searchPlaceholder": "Buscar participante...",
+    "tableLabel": "Lista de participantes",
+    "caption": "Participantes do evento, mostrando {shown} de {total}",
+    "participant": "Participante",
+    "type": "Tipo",
+    "status": "Status",
+    "actions": "Ações",
+    "empty": "Nenhum participante encontrado",
+    "showing": "Mostrando {shown} de {total} participantes"
+  },
+  "emptyParticipants": "Nenhum participante cadastrado",
+  "emptyParticipantsDescription": "Quando houver participantes, eles aparecerao aqui."
+}

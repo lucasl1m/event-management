@@ -3,6 +3,7 @@
 import { useMemo } from 'react';
 import { parseAsString, parseAsStringEnum, useQueryState } from 'nuqs';
 import { CalendarSearchIcon, InboxIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useEvents } from '@/features/events/hooks';
 import { useDebouncedValue } from '@/hooks/use-debounced-value';
 import { EmptyState } from '@/components/shared/empty-state';
@@ -15,6 +16,7 @@ const statusValues = ['all', 'active', 'closed', 'cancelled'] as const;
 const sortValues = ['asc', 'desc'] as const;
 
 export function EventsPageClient() {
+  const t = useTranslations('events');
   const [search, setSearch] = useQueryState(
     'q',
     parseAsString.withDefault('').withOptions({ clearOnDefault: true }),
@@ -60,8 +62,8 @@ export function EventsPageClient() {
     if (eventsQuery.isError) {
       return (
         <ErrorState
-          title="Não foi possível carregar os eventos"
-          description="Verifique sua conexão e tente novamente."
+          title={t('loadErrorTitle')}
+          description={t('loadErrorDescription')}
           onRetry={() => eventsQuery.refetch()}
         />
       );
@@ -71,8 +73,8 @@ export function EventsPageClient() {
       return (
         <EmptyState
           icon={InboxIcon}
-          title="Nenhum evento cadastrado"
-          description="Quando houver eventos, eles aparecerão aqui."
+          title={t('emptyRegistered')}
+          description={t('emptyRegisteredDescription')}
         />
       );
     }
@@ -81,12 +83,12 @@ export function EventsPageClient() {
       return (
         <EmptyState
           icon={CalendarSearchIcon}
-          title="Nenhum evento corresponde aos filtros"
-          description="Tente ajustar a busca ou limpar os filtros aplicados."
+          title={t('emptyFiltered')}
+          description={t('emptyFilteredDescription')}
           action={
             hasActiveFilters
               ? {
-                  label: 'Limpar filtros',
+                  label: t('clearFilters'),
                   onClick: () => {
                     setSearch('');
                     setStatus('all');
@@ -114,10 +116,11 @@ export function EventsPageClient() {
 
       {!eventsQuery.isLoading && !eventsQuery.isError && totalUnfiltered > 0 ? (
         <p className="text-xs text-muted-foreground" aria-live="polite">
-          Mostrando{' '}
-          <span className="font-medium tabular-nums text-foreground">{filteredEvents.length}</span>{' '}
-          de <span className="font-medium tabular-nums text-foreground">{totalUnfiltered}</span>{' '}
-          {totalUnfiltered === 1 ? 'evento' : 'eventos'}.
+          {t('showing', {
+            shown: filteredEvents.length,
+            total: totalUnfiltered,
+            label: totalUnfiltered === 1 ? t('eventSingle') : t('eventPlural'),
+          })}
         </p>
       ) : null}
 

@@ -1,0 +1,20 @@
+{
+  "navigation": {
+    "main": "Navegacao principal",
+    "mobile": "Navegacao mobile",
+    "home": "Inicio",
+    "events": "Eventos"
+  },
+  "topBar": {
+    "title": "Barra de topo",
+    "notifications": "Notificacoes",
+    "language": "Idioma"
+  },
+  "theme": {
+    "open": "Abrir opcoes de tema",
+    "appearance": "Aparencia",
+    "light": "Claro",
+    "dark": "Escuro",
+    "system": "Sistema"
+  }
+}

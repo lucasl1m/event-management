@@ -1,0 +1,20 @@
+{
+  "navigation": {
+    "main": "Main navigation",
+    "mobile": "Mobile navigation",
+    "home": "Home",
+    "events": "Events"
+  },
+  "topBar": {
+    "title": "Top bar",
+    "notifications": "Notifications",
+    "language": "Language"
+  },
+  "theme": {
+    "open": "Open theme options",
+    "appearance": "Appearance",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  }
+}

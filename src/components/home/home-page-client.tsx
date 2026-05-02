@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import {
   CalendarIcon,
   CheckCircle2Icon,
@@ -11,6 +11,7 @@ import {
   ActivityIcon,
 } from 'lucide-react';
 import { useEvents } from '@/features/events/hooks';
+import { Link } from '@/i18n/navigation';
 import { ErrorState } from '@/components/shared/error-state';
 import { HomeSkeleton } from './home-skeleton';
 import { StatCard } from './stat-card';
@@ -20,6 +21,7 @@ import { EntryRateChart } from './entry-rate-chart';
 import { StatusBreakdown } from './status-breakdown';
 
 export function HomePageClient() {
+  const t = useTranslations('home');
   const { data: events, isLoading, isError, refetch } = useEvents();
 
   const metrics = useMemo(() => {
@@ -43,8 +45,8 @@ export function HomePageClient() {
     if (!events?.length) return [];
     return events.map((e) => ({
       name: e.name.length > 16 ? e.name.slice(0, 14) + '…' : e.name,
-      'Check-ins': e.checkin_count,
-      Esperados: e.expected_count,
+      checkins: e.checkin_count,
+      expected: e.expected_count,
     }));
   }, [events]);
 
@@ -74,7 +76,7 @@ export function HomePageClient() {
   if (!events?.length || !metrics) {
     return (
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 py-8 md:px-8 md:py-10">
-        <p className="text-sm text-muted-foreground">Nenhum evento encontrado.</p>
+        <p className="text-sm text-muted-foreground">{t('empty')}</p>
       </div>
     );
   }
@@ -87,41 +89,47 @@ export function HomePageClient() {
         style={{ animationDelay: '0ms' }}
       >
         <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-          Início
+          {t('title')}
         </h1>
         <p className="text-sm text-muted-foreground">
-          Visão geral de {metrics.total} evento{metrics.total !== 1 ? 's' : ''} — {metrics.active}{' '}
-          ativo{metrics.active !== 1 ? 's' : ''}, {metrics.closed} encerrado
-          {metrics.closed !== 1 ? 's' : ''}, {metrics.cancelled} cancelado
-          {metrics.cancelled !== 1 ? 's' : ''}.
+          {t('overview', {
+            total: metrics.total,
+            eventsLabel: metrics.total === 1 ? t('eventsSingular') : t('eventsPlural'),
+            active: metrics.active,
+            activeLabel: metrics.active === 1 ? t('activeSingular') : t('activePlural'),
+            closed: metrics.closed,
+            closedLabel: metrics.closed === 1 ? t('closedSingular') : t('closedPlural'),
+            cancelled: metrics.cancelled,
+            cancelledLabel: metrics.cancelled === 1 ? t('cancelledSingular') : t('cancelledPlural'),
+          })}
         </p>
       </div>
 
       {/* Stat cards */}
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
         <StatCard
-          label="Total de eventos"
+          label={t('stats.totalEvents')}
           value={metrics.total}
           icon={<CalendarIcon className="size-3.5" aria-hidden />}
           accent="muted"
           index={0}
         />
         <StatCard
-          label="Eventos ativos"
+          label={t('stats.activeEvents')}
           value={metrics.active}
           icon={<ActivityIcon className="size-3.5" aria-hidden />}
           accent="emerald"
           index={1}
         />
         <StatCard
-          label="Check-ins totais"
+          label={t('stats.totalCheckins')}
           value={metrics.totalCheckins}
           icon={<CheckCircle2Icon className="size-3.5" aria-hidden />}
           accent="emerald"
           index={2}
         />
         <StatCard
-          label="Taxa média"
+          label={t('stats.averageRate')}
           value={metrics.avgRate}
           format={{ style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }}
           icon={<TrendingUpIcon className="size-3.5" aria-hidden />}
@@ -129,7 +137,7 @@ export function HomePageClient() {
           index={3}
         />
         <StatCard
-          label="Erros totais"
+          label={t('stats.totalErrors')}
           value={metrics.totalErrors}
           icon={<AlertCircleIcon className="size-3.5" aria-hidden />}
           accent={metrics.totalErrors > 0 ? 'rose' : 'muted'}
@@ -166,13 +174,13 @@ export function HomePageClient() {
             style={{ animationDelay: '560ms' }}
           >
             <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
-              Eventos Ativos
+              {t('activeEvents')}
             </p>
             <Link
               href="/events"
-              className="flex items-center gap-1 text-xs text-emerald-400 transition-colors hover:text-emerald-300"
+              className="flex items-center gap-1 text-xs text-primary transition-colors hover:text-primary/80"
             >
-              Ver todos <ArrowRightIcon className="size-3" aria-hidden />
+              {t('viewAll')} <ArrowRightIcon className="size-3" aria-hidden />
             </Link>
           </div>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">

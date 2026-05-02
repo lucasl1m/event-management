@@ -2,9 +2,6 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { Providers } from './providers';
 import './globals.css';
-import { Sidebar } from '@/components/layout/sidebar';
-import { TopBar } from '@/components/layout/top-bar';
-import { MobileNav } from '@/components/layout/mobile-nav';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -17,8 +14,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Painel de Gestão de Eventos',
-  description: 'Painel para acompanhamento de eventos, controle de acesso e métricas.',
+  title: 'Event Management Dashboard',
+  description: 'Dashboard for event tracking, access control and real-time metrics.',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
 };
 
 export default function RootLayout({
@@ -29,24 +34,11 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`dark ${geistSans.variable} ${geistMono.variable} h-full overflow-hidden antialiased`}
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} h-full overflow-hidden antialiased`}
     >
       <body className="h-full overflow-hidden bg-background text-foreground">
-        <Providers>
-          <div className="flex h-full min-h-screen">
-            <Sidebar />
-
-            <div className="flex flex-1 flex-col overflow-hidden">
-              <TopBar />
-
-              <main id="main-content" className="flex-1 overflow-y-auto pb-16 md:pb-0">
-                {children}
-              </main>
-            </div>
-
-            <MobileNav />
-          </div>
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

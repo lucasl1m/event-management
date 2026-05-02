@@ -1,6 +1,7 @@
 'use client';
 
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
+import { useTranslations } from 'next-intl';
 import type { Event } from '@/types/api';
 import { formatNumber, formatPercent } from '@/lib/format';
 
@@ -25,19 +26,20 @@ function CustomTooltip({ active, payload }: CustomTooltipProps) {
 }
 
 export function SuccessErrorChart({ event }: SuccessErrorChartProps) {
+  const t = useTranslations('eventDetail.successErrorChart');
   const total = event.checkin_count + event.error_count;
   const successRate = total > 0 ? event.checkin_count / total : 0;
   const errorRate = total > 0 ? event.error_count / total : 0;
 
   const data = [
-    { name: 'Sucesso', value: event.checkin_count, fill: 'oklch(0.78 0.16 162.48)' },
-    { name: 'Erro', value: event.error_count, fill: 'oklch(0.645 0.246 16.439)' },
+    { name: t('success'), value: event.checkin_count, fill: 'oklch(0.78 0.16 162.48)' },
+    { name: t('error'), value: event.error_count, fill: 'oklch(0.645 0.246 16.439)' },
   ];
 
   if (total === 0) {
     return (
       <div className="flex h-full min-h-48 items-center justify-center text-sm text-muted-foreground">
-        Sem tentativas registradas
+        {t('empty')}
       </div>
     );
   }
@@ -72,7 +74,7 @@ export function SuccessErrorChart({ event }: SuccessErrorChartProps) {
             {formatNumber(total)}
           </span>
           <span className="text-[11px] uppercase tracking-widest text-muted-foreground">
-            tentativas
+            {t('attempts')}
           </span>
         </div>
       </div>
@@ -86,7 +88,7 @@ export function SuccessErrorChart({ event }: SuccessErrorChartProps) {
             </span>
           </div>
           <span className="text-[11px] uppercase tracking-widest text-muted-foreground">
-            Sucesso
+            {t('success')}
           </span>
         </div>
 
@@ -97,7 +99,9 @@ export function SuccessErrorChart({ event }: SuccessErrorChartProps) {
               {formatPercent(errorRate)}
             </span>
           </div>
-          <span className="text-[11px] uppercase tracking-widest text-muted-foreground">Erro</span>
+          <span className="text-[11px] uppercase tracking-widest text-muted-foreground">
+            {t('error')}
+          </span>
         </div>
       </div>
     </div>

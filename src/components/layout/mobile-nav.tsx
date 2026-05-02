@@ -1,19 +1,20 @@
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { Link, usePathname } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { NAV_ITEMS } from '@/types/navigation';
 
 export function MobileNav() {
+  const t = useTranslations('layout.navigation');
   const pathname = usePathname();
 
   return (
     <nav
-      aria-label="Navegação mobile"
+      aria-label={t('mobile')}
       className="fixed inset-x-0 bottom-0 z-50 flex h-16 items-center border-t border-border/60 bg-background/95 backdrop-blur md:hidden"
     >
-      {NAV_ITEMS.map(({ href, icon: Icon, label }) => {
+      {NAV_ITEMS.map(({ href, icon: Icon, labelKey }) => {
         const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href);
         return (
           <Link
@@ -22,9 +23,7 @@ export function MobileNav() {
             aria-current={isActive ? 'page' : undefined}
             className={cn(
               'flex flex-1 flex-col items-center justify-center gap-1 py-2 text-[10px] font-medium uppercase tracking-widest transition-colors duration-150',
-              isActive
-                ? 'text-emerald-400'
-                : 'text-muted-foreground/60 hover:text-muted-foreground',
+              isActive ? 'text-primary' : 'text-muted-foreground hover:text-foreground',
             )}
           >
             <Icon
@@ -34,7 +33,7 @@ export function MobileNav() {
                 isActive ? 'scale-110' : '',
               )}
             />
-            {label}
+            {t(labelKey)}
           </Link>
         );
       })}

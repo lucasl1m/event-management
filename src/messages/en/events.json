@@ -1,0 +1,27 @@
+{
+  "title": "Events",
+  "subtitle": "Manage and track all your events in one place.",
+  "expected": "Expected",
+  "date": "Date",
+  "location": "Location",
+  "showing": "Showing {shown} of {total} {label}.",
+  "eventSingle": "event",
+  "eventPlural": "events",
+  "filters": {
+    "searchLabel": "Search events",
+    "searchPlaceholder": "Search events...",
+    "statusLabel": "Filter by status",
+    "statusAll": "All",
+    "statusActive": "Active",
+    "statusClosed": "Closed",
+    "statusCancelled": "Cancelled",
+    "sortDate": "Date"
+  },
+  "emptyRegistered": "No events registered",
+  "loadErrorTitle": "Could not load events",
+  "loadErrorDescription": "Check your connection and try again.",
+  "emptyRegisteredDescription": "Events will appear here when available.",
+  "emptyFiltered": "No events match your filters",
+  "emptyFilteredDescription": "Try adjusting search or clearing active filters.",
+  "clearFilters": "Clear filters"
+}

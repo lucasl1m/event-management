@@ -1,0 +1,36 @@
+{
+  "title": "Inicio",
+  "empty": "Nenhum evento encontrado.",
+  "overview": "Visao geral de {total} {eventsLabel} - {active} {activeLabel}, {closed} {closedLabel}, {cancelled} {cancelledLabel}.",
+  "eventsSingular": "evento",
+  "eventsPlural": "eventos",
+  "activeSingular": "ativo",
+  "activePlural": "ativos",
+  "closedSingular": "encerrado",
+  "closedPlural": "encerrados",
+  "cancelledSingular": "cancelado",
+  "cancelledPlural": "cancelados",
+  "stats": {
+    "totalEvents": "Total de eventos",
+    "activeEvents": "Eventos ativos",
+    "totalCheckins": "Check-ins totais",
+    "averageRate": "Taxa media",
+    "totalErrors": "Erros totais"
+  },
+  "charts": {
+    "checkinsVsExpected": "Check-ins vs esperados",
+    "byEvent": "por evento",
+    "expected": "Esperados",
+    "checkins": "Check-ins",
+    "entryRate": "Taxa de entrada",
+    "byEventPercent": "por evento (%)",
+    "closed": "Encerrado"
+  },
+  "activeEvents": "Eventos ativos",
+  "statusBreakdown": {
+    "active": "Ativos",
+    "closed": "Encerrados",
+    "cancelled": "Cancelados"
+  },
+  "viewAll": "Ver todos"
+}

@@ -3,10 +3,10 @@
 import { useMemo, useState } from 'react';
 import { AnimatedNumber } from '@/components/shared/animated-number';
 import { StarIcon, SearchIcon, LogInIcon, LogOutIcon, LoaderIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 import type { Event, Participant } from '@/types/api';
 import { useCheckIn } from '@/features/checkins/hooks';
@@ -28,22 +28,26 @@ function getInitials(name: string): string {
 }
 
 function ParticipantTypeBadge({ type }: { type: Participant['type'] }) {
+  const t = useTranslations('common.participantType');
+
   if (type === 'vip') {
     return (
       <span className="inline-flex items-center gap-1 rounded-full border border-amber-500/30 bg-amber-500/10 px-2 py-0.5 text-[11px] font-semibold text-amber-300">
         <StarIcon className="size-3" aria-hidden />
-        VIP
+        {t('vip')}
       </span>
     );
   }
   return (
     <span className="inline-flex items-center rounded-full border border-border/60 bg-muted/40 px-2 py-0.5 text-[11px] font-semibold text-muted-foreground">
-      Normal
+      {t('normal')}
     </span>
   );
 }
 
 function StatusDot({ status }: { status: Participant['status'] }) {
+  const t = useTranslations('eventDetail.participants');
+
   return (
     <div className="flex items-center gap-2">
       <span
@@ -52,19 +56,21 @@ function StatusDot({ status }: { status: Participant['status'] }) {
           'size-2 rounded-full',
           status === 'inside'
             ? 'bg-emerald-400 shadow-[0_0_6px_--theme(--color-emerald-400/60%)]'
-            : 'bg-zinc-500',
+            : 'bg-muted-foreground',
         )}
       />
       <span
         className={cn('text-sm', status === 'inside' ? 'text-foreground' : 'text-muted-foreground')}
       >
-        {status === 'inside' ? 'Dentro' : 'Fora'}
+        {status === 'inside' ? t('statusInside') : t('statusOutside')}
       </span>
     </div>
   );
 }
 
 function CheckinButton({ participant, event }: { participant: Participant; event: Event }) {
+  const t = useTranslations('eventDetail.participants');
+  const [tooltipOpen, setTooltipOpen] = useState(false);
   const mutation = useCheckIn();
   const isPending = mutation.isPending;
   const isEventClosed = event.status === 'closed' || event.status === 'cancelled';
@@ -76,20 +82,25 @@ function CheckinButton({ participant, event }: { participant: Participant; event
 
   let disabledReason = '';
   if (isEventClosed) {
-    disabledReason = event.status === 'cancelled' ? 'Evento cancelado' : 'Evento encerrado';
+    disabledReason = event.status === 'cancelled' ? t('eventCancelled') : t('eventClosed');
   } else if (isNormalBlocked) {
-    disabledReason = 'Participante já realizou check-in';
+    disabledReason = t('alreadyCheckedIn');
   }
+
+  const actionLabel = action === 'entry' ? t('entry') : t('exit');
 
   const button = (
     <Button
       size="sm"
       variant={action === 'exit' ? 'outline' : 'default'}
       disabled={isDisabled}
-      aria-label={`${action === 'entry' ? 'Entrada' : 'Saída'} para ${participant.name}`}
+      aria-label={t('actionFor', { action: actionLabel, name: participant.name })}
       className={cn(
-        'h-8 gap-1.5 px-3 text-xs font-semibold disabled:cursor-not-allowed',
-        action === 'entry' && !isDisabled && 'bg-emerald-500 text-black hover:bg-emerald-400',
+        'h-8 gap-1.5 px-3 text-xs font-semibold disabled:pointer-events-auto disabled:cursor-not-allowed',
+        isDisabled && 'bg-muted text-muted-foreground hover:bg-muted',
+        action === 'entry' &&
+          !isDisabled &&
+          'bg-primary text-white hover:bg-primary/90 dark:text-primary-foreground',
       )}
       onClick={() => mutation.mutate({ participant, event, action })}
     >
@@ -100,31 +111,41 @@ function CheckinButton({ participant, event }: { participant: Participant; event
       ) : (
         <LogOutIcon className="size-3.5" aria-hidden />
       )}
-      {action === 'entry' ? 'Entrada' : 'Saída'}
+      {actionLabel}
     </Button>
   );
 
   if (disabledReason) {
     return (
-      <Tooltip>
-        <TooltipTrigger asChild>{button}</TooltipTrigger>
-        <TooltipContent side="left">
-          <p>{disabledReason}</p>
-        </TooltipContent>
-      </Tooltip>
+      <span
+        className="relative inline-flex"
+        onMouseEnter={() => setTooltipOpen(true)}
+        onMouseLeave={() => setTooltipOpen(false)}
+      >
+        {button}
+        {tooltipOpen ? (
+          <span
+            role="tooltip"
+            className="absolute right-full top-1/2 z-50 mr-2 -translate-y-1/2 whitespace-nowrap rounded-md border border-border bg-popover px-3 py-1.5 text-xs text-popover-foreground shadow-md"
+          >
+            {disabledReason}
+          </span>
+        ) : null}
+      </span>
     );
   }
 
   return button;
 }
 
-const FILTERS: { value: ParticipantFilter; label: string }[] = [
-  { value: 'all', label: 'Todos' },
-  { value: 'inside', label: 'Dentro' },
-  { value: 'outside', label: 'Fora' },
+const FILTERS: { value: ParticipantFilter; labelKey: 'all' | 'inside' | 'outside' }[] = [
+  { value: 'all', labelKey: 'all' },
+  { value: 'inside', labelKey: 'inside' },
+  { value: 'outside', labelKey: 'outside' },
 ];
 
 export function ParticipantsTable({ participants, event }: ParticipantsTableProps) {
+  const t = useTranslations('eventDetail.participants');
   const [filter, setFilter] = useState<ParticipantFilter>('all');
   const [search, setSearch] = useState('');
 
@@ -151,7 +172,7 @@ export function ParticipantsTable({ participants, event }: ParticipantsTableProp
           role="tablist"
           className="flex items-center gap-0 rounded-lg border border-border/50 bg-card p-0.5"
         >
-          {FILTERS.map(({ value, label }) => (
+          {FILTERS.map(({ value, labelKey }) => (
             <button
               key={value}
               role="tab"
@@ -164,12 +185,12 @@ export function ParticipantsTable({ participants, event }: ParticipantsTableProp
                   : 'text-muted-foreground hover:text-foreground',
               )}
             >
-              {label}
+              {t(`filters.${labelKey}`)}
               <span
                 className={cn(
                   'ml-1.5 rounded-full px-1.5 py-0.5 text-[11px] tabular-nums',
                   filter === value
-                    ? 'bg-emerald-500/15 text-emerald-400'
+                    ? 'bg-primary/15 text-primary'
                     : 'bg-muted/60 text-muted-foreground',
                 )}
               >
@@ -181,7 +202,7 @@ export function ParticipantsTable({ participants, event }: ParticipantsTableProp
 
         <div className="relative w-full max-w-xs">
           <label htmlFor="participant-search" className="sr-only">
-            Buscar participante
+            {t('searchLabel')}
           </label>
           <SearchIcon
             className="pointer-events-none absolute left-3 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground"
@@ -190,7 +211,7 @@ export function ParticipantsTable({ participants, event }: ParticipantsTableProp
           <Input
             id="participant-search"
             type="search"
-            placeholder="Buscar participante..."
+            placeholder={t('searchPlaceholder')}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="h-9 pl-9 text-sm"
@@ -199,9 +220,9 @@ export function ParticipantsTable({ participants, event }: ParticipantsTableProp
       </div>
 
       <div className="overflow-x-auto rounded-xl border border-border/50">
-        <table className="w-full" aria-label="Lista de participantes">
+        <table className="w-full" aria-label={t('tableLabel')}>
           <caption className="sr-only">
-            Participantes do evento, mostrando {filtered.length} de {participants.length}
+            {t('caption', { shown: filtered.length, total: participants.length })}
           </caption>
           <thead>
             <tr className="border-b border-border/50 bg-card">
@@ -209,25 +230,25 @@ export function ParticipantsTable({ participants, event }: ParticipantsTableProp
                 scope="col"
                 className="px-4 py-3 text-left text-[11px] font-semibold uppercase tracking-widest text-muted-foreground"
               >
-                Participante
+                {t('participant')}
               </th>
               <th
                 scope="col"
                 className="px-4 py-3 text-left text-[11px] font-semibold uppercase tracking-widest text-muted-foreground"
               >
-                Tipo
+                {t('type')}
               </th>
               <th
                 scope="col"
                 className="px-4 py-3 text-left text-[11px] font-semibold uppercase tracking-widest text-muted-foreground"
               >
-                Status
+                {t('status')}
               </th>
               <th
                 scope="col"
                 className="px-4 py-3 text-right text-[11px] font-semibold uppercase tracking-widest text-muted-foreground"
               >
-                Ações
+                {t('actions')}
               </th>
             </tr>
           </thead>
@@ -235,7 +256,7 @@ export function ParticipantsTable({ participants, event }: ParticipantsTableProp
             {filtered.length === 0 ? (
               <tr>
                 <td colSpan={4} className="px-4 py-10 text-center text-sm text-muted-foreground">
-                  Nenhum participante encontrado
+                  {t('empty')}
                 </td>
               </tr>
             ) : (
@@ -280,8 +301,7 @@ export function ParticipantsTable({ participants, event }: ParticipantsTableProp
 
       {filtered.length > 0 && (
         <p className="text-xs text-muted-foreground" aria-live="polite">
-          Mostrando <span className="tabular-nums text-foreground">{filtered.length}</span> de{' '}
-          <span className="tabular-nums text-foreground">{participants.length}</span> participantes
+          {t('showing', { shown: filtered.length, total: participants.length })}
         </p>
       )}
     </div>

@@ -1,19 +1,23 @@
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 import type { EventStatus } from '@/types/api';
 
-const STATUS_STYLES: Record<EventStatus, { label: string; container: string; dot: string }> = {
+const STATUS_STYLES: Record<
+  EventStatus,
+  { labelKey: EventStatus; container: string; dot: string }
+> = {
   active: {
-    label: 'Ativo',
+    labelKey: 'active',
     container: 'border-emerald-500/25 bg-emerald-500/10 text-emerald-300',
     dot: 'bg-emerald-400 shadow-[0_0_0_3px_rgba(16,185,129,0.18)]',
   },
   closed: {
-    label: 'Encerrado',
-    container: 'border-zinc-700/60 bg-zinc-800/50 text-zinc-300',
-    dot: 'bg-zinc-400',
+    labelKey: 'closed',
+    container: 'border-border bg-muted/60 text-muted-foreground',
+    dot: 'bg-muted-foreground',
   },
   cancelled: {
-    label: 'Cancelado',
+    labelKey: 'cancelled',
     container: 'border-rose-500/25 bg-rose-500/10 text-rose-300',
     dot: 'bg-rose-400 shadow-[0_0_0_3px_rgba(244,63,94,0.18)]',
   },
@@ -25,6 +29,7 @@ type StatusBadgeProps = {
 };
 
 export function StatusBadge({ status, className }: StatusBadgeProps) {
+  const t = useTranslations('common.status');
   const style = STATUS_STYLES[status];
 
   return (
@@ -36,7 +41,7 @@ export function StatusBadge({ status, className }: StatusBadgeProps) {
       )}
     >
       <span aria-hidden="true" className={cn('size-1.5 rounded-full', style.dot)} />
-      {style.label}
+      {t(style.labelKey)}
     </span>
   );
 }

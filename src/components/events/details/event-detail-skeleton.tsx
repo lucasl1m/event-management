@@ -1,8 +1,12 @@
 import { Skeleton } from '@/components/ui/skeleton';
 
-export function EventDetailSkeleton() {
+type EventDetailSkeletonProps = {
+  ariaLabel?: string;
+};
+
+export function EventDetailSkeleton({ ariaLabel = 'Loading event' }: EventDetailSkeletonProps) {
   return (
-    <div className="flex flex-col gap-8" aria-busy="true" aria-label="Carregando evento">
+    <div className="flex flex-col gap-8" aria-busy="true" aria-label={ariaLabel}>
       {/* Breadcrumb */}
       <div className="flex items-center gap-1.5">
         <Skeleton className="h-4 w-16" />
