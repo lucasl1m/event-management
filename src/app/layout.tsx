@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { AppShell } from '@/components/layout/app-shell';
 import { Providers } from './providers';
 import './globals.css';
 
@@ -28,8 +29,10 @@ export default function RootLayout({
       lang="pt-BR"
       className={`dark ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="bg-background text-foreground flex min-h-full flex-col">
-        <Providers>{children}</Providers>
+      <body className="bg-background text-foreground h-full">
+        <Providers>
+          <AppShell>{children}</AppShell>
+        </Providers>
       </body>
     </html>
   );
