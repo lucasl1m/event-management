@@ -10,7 +10,6 @@ import {
   ArrowRightIcon,
   ActivityIcon,
 } from 'lucide-react';
-import { formatNumber, formatPercent } from '@/lib/format';
 import { useEvents } from '@/features/events/hooks';
 import { ErrorState } from '@/components/shared/error-state';
 import { HomeSkeleton } from './home-skeleton';
@@ -116,21 +115,22 @@ export function HomePageClient() {
         />
         <StatCard
           label="Check-ins totais"
-          value={formatNumber(metrics.totalCheckins)}
+          value={metrics.totalCheckins}
           icon={<CheckCircle2Icon className="size-3.5" aria-hidden />}
           accent="emerald"
           index={2}
         />
         <StatCard
           label="Taxa média"
-          value={formatPercent(metrics.avgRate)}
+          value={metrics.avgRate}
+          format={{ style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }}
           icon={<TrendingUpIcon className="size-3.5" aria-hidden />}
           accent={metrics.avgRate >= 0.8 ? 'emerald' : metrics.avgRate >= 0.5 ? 'amber' : 'rose'}
           index={3}
         />
         <StatCard
           label="Erros totais"
-          value={formatNumber(metrics.totalErrors)}
+          value={metrics.totalErrors}
           icon={<AlertCircleIcon className="size-3.5" aria-hidden />}
           accent={metrics.totalErrors > 0 ? 'rose' : 'muted'}
           index={4}

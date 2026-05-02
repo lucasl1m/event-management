@@ -1,6 +1,7 @@
+import NumberFlow from '@number-flow/react';
 import { AlertTriangleIcon, TrendingUpIcon, UsersIcon, UserCheckIcon } from 'lucide-react';
 import type { Event } from '@/types/api';
-import { formatNumber, formatPercent } from '@/lib/format';
+import { formatPercent } from '@/lib/format';
 import { MetricCard } from './metric-card';
 
 type MetricsGridProps = {
@@ -17,7 +18,7 @@ export function MetricsGrid({ event }: MetricsGridProps) {
       <MetricCard
         index={0}
         label="Participantes Esperados"
-        value={formatNumber(event.expected_count)}
+        value={<NumberFlow value={event.expected_count} locales="pt-BR" />}
         icon={<UsersIcon className="size-4" aria-hidden />}
         subtitle="Capacidade total do local"
         variant="default"
@@ -26,7 +27,7 @@ export function MetricsGrid({ event }: MetricsGridProps) {
       <MetricCard
         index={1}
         label="Check-ins Realizados"
-        value={formatNumber(event.checkin_count)}
+        value={<NumberFlow value={event.checkin_count} locales="pt-BR" />}
         icon={<UserCheckIcon className="size-4" aria-hidden />}
         subtitle={`${formatPercent(entryPercent)} dos esperados`}
         variant="success"
@@ -35,7 +36,7 @@ export function MetricsGrid({ event }: MetricsGridProps) {
       <MetricCard
         index={2}
         label="Tentativas com Erro"
-        value={formatNumber(event.error_count)}
+        value={<NumberFlow value={event.error_count} locales="pt-BR" />}
         icon={<AlertTriangleIcon className="size-4" aria-hidden />}
         subtitle={
           totalAttempts > 0 ? `${formatPercent(errorRate)} das tentativas` : 'Sem tentativas'
@@ -46,7 +47,13 @@ export function MetricsGrid({ event }: MetricsGridProps) {
       <MetricCard
         index={3}
         label="Taxa de Entrada"
-        value={formatPercent(entryPercent)}
+        value={
+          <NumberFlow
+            value={entryPercent}
+            format={{ style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }}
+            locales="pt-BR"
+          />
+        }
         icon={<TrendingUpIcon className="size-4" aria-hidden />}
         variant={entryPercent >= 0.5 ? 'success' : entryPercent > 0 ? 'warning' : 'default'}
         extra={
