@@ -1,8 +1,10 @@
 'use client';
 
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { ChevronRightIcon, CalendarIcon, MapPinIcon, UsersIcon, BanIcon } from 'lucide-react';
 import { useEvent, useEventCheckins, useEventParticipants } from '@/features/events/hooks';
+import { useUiStore } from '@/stores/ui-store';
 import { formatEventDate } from '@/lib/format';
 import { StatusBadge } from '@/components/shared/status-badge';
 import { ErrorState } from '@/components/shared/error-state';
@@ -21,6 +23,11 @@ export function EventDetailClient({ eventId }: EventDetailClientProps) {
   const eventQuery = useEvent(eventId);
   const participantsQuery = useEventParticipants(eventId);
   const checkinsQuery = useEventCheckins(eventId);
+  const setLastVisitedEventId = useUiStore((s) => s.setLastVisitedEventId);
+
+  useEffect(() => {
+    if (eventQuery.data) setLastVisitedEventId(eventId);
+  }, [eventId, eventQuery.data, setLastVisitedEventId]);
 
   const isLoading = eventQuery.isLoading || participantsQuery.isLoading || checkinsQuery.isLoading;
   const isError = eventQuery.isError;

@@ -2,14 +2,9 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { CalendarRangeIcon, HomeIcon, SettingsIcon } from 'lucide-react';
+import { CalendarRangeIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-const NAV_ITEMS = [
-  { href: '/', icon: HomeIcon, label: 'Início' },
-  { href: '/events', icon: CalendarRangeIcon, label: 'Eventos' },
-  { href: '/settings', icon: SettingsIcon, label: 'Configurações' },
-] as const;
+import { NAV_ITEMS } from '@/types/navigation';
 
 export function Sidebar() {
   const pathname = usePathname();
