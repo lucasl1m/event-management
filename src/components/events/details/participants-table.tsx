@@ -50,7 +50,7 @@ function StatusDot({ status }: { status: Participant['status'] }) {
         className={cn(
           'size-2 rounded-full',
           status === 'inside'
-            ? 'bg-emerald-400 shadow-[0_0_6px_theme(colors.emerald.400/60%)]'
+            ? 'bg-emerald-400 shadow-[0_0_6px_--theme(--color-emerald-400/60%)]'
             : 'bg-zinc-500',
         )}
       />
@@ -87,7 +87,7 @@ function CheckinButton({ participant, event }: { participant: Participant; event
       disabled={isDisabled}
       aria-label={`${action === 'entry' ? 'Entrada' : 'Saída'} para ${participant.name}`}
       className={cn(
-        'h-8 gap-1.5 px-3 text-xs font-semibold',
+        'h-8 gap-1.5 px-3 text-xs font-semibold disabled:cursor-not-allowed',
         action === 'entry' && !isDisabled && 'bg-emerald-500 text-black hover:bg-emerald-400',
       )}
       onClick={() => mutation.mutate({ participant, event, action })}
