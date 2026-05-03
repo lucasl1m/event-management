@@ -24,6 +24,17 @@ export const metadata: Metadata = {
     ],
     apple: '/apple-touch-icon.png',
   },
+  openGraph: {
+    title: 'Event Management Dashboard',
+    description: 'Dashboard for event tracking, access control and real-time metrics.',
+    images: [{ url: '/og-image.png' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Event Management Dashboard',
+    description: 'Dashboard for event tracking, access control and real-time metrics.',
+    images: ['/og-image.png'],
+  },
 };
 
 export default function RootLayout({

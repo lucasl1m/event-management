@@ -16,7 +16,7 @@ export function Sidebar() {
       className="hidden w-[240px] shrink-0 flex-col border-r border-border/50 bg-background md:flex"
     >
       <div className="flex h-16 items-center border-b border-border/50 px-5">
-        <BrandLogo />
+        <BrandLogo priority />
       </div>
 
       <nav className="flex flex-1 flex-col gap-1 px-3 py-4">
