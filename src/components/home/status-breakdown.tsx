@@ -38,7 +38,7 @@ export function StatusBreakdown({ active, closed, cancelled }: StatusBreakdownPr
   const values = { active, closed, cancelled };
 
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
       {ITEMS.map(({ key, icon: Icon, color, bg, border }) => (
         <div key={key} className={cn('flex items-center gap-3 rounded-xl border p-4', bg, border)}>
           <span className={cn('shrink-0', color)}>
