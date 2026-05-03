@@ -23,5 +23,13 @@ export function AnimatedNumber({
     return () => cancelAnimationFrame(raf);
   }, [value]);
 
-  return <NumberFlow value={displayed} format={format} locales={locales} className={className} />;
+  return (
+    <NumberFlow
+      suppressHydrationWarning
+      value={displayed}
+      format={format}
+      locales={locales}
+      className={className}
+    />
+  );
 }
